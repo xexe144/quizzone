@@ -27,7 +27,7 @@
   { "name":"Harry Kane","nation":"England","code":"gb","age":30,"league":"Germany","position":"ST","number":9 },
   { "name":"Antoine Griezmann","nation":"France","code":"fr","age":33,"league":"Spain","position":"SS","number":7 },
   { "name":"Victor Osimhen","nation":"Nigeria","code":"ng","age":25,"league":"Italy","position":"ST","number":9 },
-  ,
+  
   { "name":"Alisson Becker","nation":"Brazil","code":"br","age":31,"league":"England","position":"GK","number":1 },
   { "name":"Ederson","nation":"Brazil","code":"br","age":30,"league":"England","position":"GK","number":31 },
   { "name":"Virgil van Dijk","nation":"Netherlands","code":"nl","age":32,"league":"England","position":"CB","number":4 },
@@ -66,7 +66,7 @@
   { "name":"Joshua Kimmich","nation":"Germany","code":"de","age":29,"league":"Germany","position":"DM","number":6 },
   { "name":"Jamal Musiala","nation":"Germany","code":"de","age":21,"league":"Germany","position":"AM","number":42 },
   { "name":"Thomas Muller","nation":"Germany","code":"de","age":34,"league":"Germany","position":"SS","number":25 },
-  ,
+  
   { "name":"Aaron Ramsdale","nation":"England","code":"gb","age":26,"league":"England","position":"GK","number":1 },
   { "name":"Emiliano Martinez","nation":"Argentina","code":"ar","age":31,"league":"England","position":"GK","number":23 },
   { "name":"Ben White","nation":"England","code":"gb","age":26,"league":"England","position":"CB","number":4 },
@@ -151,7 +151,7 @@
   { "name":"Benjamin Pavard","nation":"France","code":"fr","age":27,"league":"Italy","position":"RB","number":28 },
   { "name":"Randal Kolo Muani","nation":"France","code":"fr","age":25,"league":"France","position":"ST","number":23 },
   { "name":"Marcus Thuram","nation":"France","code":"fr","age":26,"league":"Italy","position":"ST","number":9 },
-  ,
+  
   { "name":"Bernd Leno","nation":"Germany","code":"de","age":32,"league":"England","position":"GK","number":17 },
   { "name":"Illan Meslier","nation":"France","code":"fr","age":24,"league":"England","position":"GK","number":1 },
   { "name":"Tino Livramento","nation":"England","code":"gb","age":21,"league":"England","position":"RB","number":21 },
@@ -189,7 +189,7 @@
   { "name":"Jonathan Clauss","nation":"France","code":"fr","age":31,"league":"France","position":"RB","number":7 },
   { "name":"Wissam Ben Yedder","nation":"France","code":"fr","age":33,"league":"France","position":"ST","number":10 },
   { "name":"Alexandre Lacazette","nation":"France","code":"fr","age":32,"league":"France","position":"ST","number":10 },
-  ,
+  
   { "name":"Guglielmo Vicario","nation":"Italy","code":"it","age":27,"league":"England","position":"GK","number":13 },
   { "name":"Sven Botman","nation":"Netherlands","code":"nl","age":24,"league":"England","position":"CB","number":4 },
   { "name":"Joelinton","nation":"Brazil","code":"br","age":27,"league":"England","position":"CM","number":7 },
@@ -232,7 +232,7 @@
   { "name":"Giorgian De Arrascaeta","nation":"Uruguay","code":"uy","age":29,"league":"Brazil","position":"AM","number":14 },
   { "name":"Pedro","nation":"Brazil","code":"br","age":26,"league":"Brazil","position":"ST","number":9 },
   { "name":"Gustavo Gomez","nation":"Paraguay","code":"py","age":31,"league":"Brazil","position":"CB","number":15 },
-  ,
+  
   { "name":"Emerson Royal","nation":"Brazil","code":"br","age":25,"league":"England","position":"RB","number":12 },
   { "name":"Rico Henry","nation":"England","code":"gb","age":26,"league":"England","position":"LB","number":3 },
   { "name":"Lewis Dunk","nation":"England","code":"gb","age":32,"league":"England","position":"CB","number":5 },
@@ -270,7 +270,7 @@
   { "name":"Patrick Kluivert","nation":"Netherlands","code":"nl","age":47,"league":"Retired","position":"ST","number":9 },
   { "name":"Luis Figo","nation":"Portugal","code":"pt","age":51,"league":"Retired","position":"RW","number":7 },
   { "name":"Hernan Crespo","nation":"Argentina","code":"ar","age":48,"league":"Retired","position":"ST","number":9 },
-  ,
+  
   { "name":"Sam Johnstone","nation":"England","code":"gb","age":31,"league":"England","position":"GK","number":1 },
   { "name":"Dean Henderson","nation":"England","code":"gb","age":27,"league":"England","position":"GK","number":1 },
   { "name":"Max Aarons","nation":"England","code":"gb","age":24,"league":"England","position":"RB","number":2 },
@@ -311,7 +311,7 @@
   { "name":"Claude Makelele","nation":"France","code":"fr","age":51,"league":"Retired","position":"DM","number":6 },
   { "name":"Fernando Torres","nation":"Spain","code":"es","age":40,"league":"Retired","position":"ST","number":9 },
   { "name":"Fabio Cannavaro","nation":"Italy","code":"it","age":50,"league":"Retired","position":"CB","number":5 },
-  ,
+  
   { "name":"Agustin Marchesin","nation":"Argentina","code":"ar","age":35,"league":"Spain","position":"GK","number":1 },
   { "name":"Cristian Romero","nation":"Argentina","code":"ar","age":25,"league":"England","position":"CB","number":17 },
   { "name":"Nahuel Molina","nation":"Argentina","code":"ar","age":26,"league":"Spain","position":"RB","number":16 },
@@ -350,7 +350,7 @@
   { "name":"Pavel Nedved","nation":"Czech Republic","code":"cz","age":51,"league":"Retired","position":"LW","number":11 },
   { "name":"Gennaro Gattuso","nation":"Italy","code":"it","age":46,"league":"Retired","position":"DM","number":8 },
   { "name":"Francesco Totti","nation":"Italy","code":"it","age":47,"league":"Retired","position":"SS","number":10 },
-  ,
+  
   { "name":"Andre Onana","nation":"Cameroon","code":"cm","age":28,"league":"England","position":"GK","number":24 },
   { "name":"Yassine Bounou","nation":"Morocco","code":"ma","age":33,"league":"Saudi Arabia","position":"GK","number":13 },
   { "name":"Edouard Mendy","nation":"Senegal","code":"sn","age":32,"league":"Saudi Arabia","position":"GK","number":16 },
@@ -384,7 +384,7 @@
   { "name":"Ashley Cole","nation":"England","code":"gb","age":43,"league":"Retired","position":"LB","number":3 },
   { "name":"Cafu","nation":"Brazil","code":"br","age":53,"league":"Retired","position":"RB","number":2 },
   { "name":"Lilian Thuram","nation":"France","code":"fr","age":52,"league":"Retired","position":"RB","number":15 },
-  ,
+  
   { "name":"Aaron Wan-Bissaka","nation":"England","code":"gb","age":26,"league":"England","position":"RB","number":29 },
   { "name":"Ben Mee","nation":"England","code":"gb","age":34,"league":"England","position":"CB","number":16 },
   { "name":"Craig Dawson","nation":"England","code":"gb","age":34,"league":"England","position":"CB","number":15 },
