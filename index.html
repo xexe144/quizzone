@@ -1,102 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>GoatZoneQuiz</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #0f172a;
-            color: white;
-        }
-
-        header {
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        header h1 {
-            font-size: 36px;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            color: #cbd5e1;
-        }
-
-        .games {
-            display: flex;
-            justify-content: center;
-            padding: 40px 20px;
-        }
-
-        .game-card {
-            background: #1e293b;
-            border-radius: 12px;
-            padding: 25px;
-            width: 280px;
-            text-align: center;
-        }
-
-        .game-card h2 {
-            margin-bottom: 10px;
-        }
-
-        .game-card p {
-            font-size: 14px;
-            color: #cbd5e1;
-            margin-bottom: 20px;
-        }
-
-        .play-btn {
-            display: inline-block;
-            padding: 12px 24px;
-            background: #22c55e;
-            color: black;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 8px;
-        }
-
-        .play-btn:hover {
-            background: #16a34a;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: #64748b;
-            font-size: 14px;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Generate Real Players JSON</title>
 </head>
 <body>
 
-<header>
-    <h1>GoatZoneQuiz</h1>
-    <p>Daily football quizzes and more. Test your knowledge. Be the goat!</p>
-</header>
+<h2>Generate players.json from real CSV</h2>
+<input type="file" id="csvFile" accept=".csv">
 
-<section class="games">
-    <div class="game-card">
-        <h2>Guess the Player</h2>
-        <p>Can you guess the football player from the clues?</p>
-        <a class="play-btn" href="guess-player-wordle.html">PLAY</a>
-    </div>
-</section>
+<script>
+const flagMap = {
+  Argentina:"ar", Portugal:"pt", France:"fr", England:"gb", Brazil:"br",
+  Spain:"es", Italy:"it", Germany:"de", Netherlands:"nl", Belgium:"be",
+  Norway:"no", Nigeria:"ng", Uruguay:"uy", Croatia:"hr"
+};
 
-<footer>
-    <p style="font-size:12px; color:#94a3b8;">
-        All logos and brands are property of their respective owners and are used for identification purposes only.
-    </p>
-    <p style="font-size:12px; color:#64748b;">
-        © 2026 GoatzoneQuiz.online All rights reserved.
-    </p>
-</footer>
+document.getElementById("csvFile").addEventListener("change", e => {
+  const file = e.target.files[0];
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    const lines = reader.result.split("\n");
+    const headers = lines[0].split(",");
+
+    const players = [];
+
+    for(let i=1;i<lines.length && players.length<2000;i++){
+      const row = lines[i].split(",");
+      if(row.length < headers.length) continue;
+
+      const get = key => row[headers.indexOf(key)] || "";
+
+      const name = get("name") || get("player_name");
+      const nation = get("nationality");
+      if(!name || !nation) continue;
+
+      players.push({
+        name: name.trim(),
+        nation: nation.trim(),
+        code: flagMap[nation.trim()] || "gb",
+        age: parseInt(get("age")) || 25,
+        league: get("league") || "Unknown",
+        position: (get("position") || "CM").substring(0,2),
+        number: Math.floor(Math.random()*30)+1
+      });
+    }
+
+    const blob = new Blob([JSON.stringify(players,null,2)], {type:"application/json"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "players.json";
+    a.click();
+
+    document.body.innerHTML += "<p>✅ players.json generated</p>";
+  };
+
+  reader.readAsText(file);
+});
+</script>
 
 </body>
 </html>
-
