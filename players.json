@@ -18,6 +18,30 @@
 { "name":"Victor Osimhen","nation":"Nigeria","code":"ng","age":27,"league":"Turkey","position":"ST","number":9 },
 
   
+{ "name":"Benjamin Sesko","nation":"Slovenia","code":"si","age":23,"league":"England","position":"ST","number":11 },
+{ "name":"Rico Lewis","nation":"England","code":"gb","age":21,"league":"England","position":"RB","number":82 },
+{ "name":"Antoine Semenyo","nation":"Ghana","code":"gh","age":26,"league":"England","position":"RW","number":24 },
+{ "name":"Bryan Mbeumo","nation":"Cameroon","code":"cm","age":26,"league":"England","position":"RW","number":19 },
+{ "name":"Amad Diallo","nation":"Ivory Coast","code":"ci","age":24,"league":"England","position":"RW","number":16 },
+{ "name":"Joshua Zirkzee","nation":"Netherlands","code":"nl","age":25,"league":"England","position":"ST","number":11 },
+{ "name":"Matheus Cunha","nation":"Brazil","code":"br","age":27,"league":"England","position":"CF","number":10 },
+
+{ "name":"Harry Maguire","nation":"England","code":"gb","age":33,"league":"England","position":"CB","number":5 },
+{ "name":"Lisandro Martinez","nation":"Argentina","code":"ar","age":28,"league":"England","position":"CB","number":6 },
+{ "name":"Mason Mount","nation":"England","code":"gb","age":27,"league":"England","position":"CM","number":7 },
+{ "name":"Rasmus Hojlund","nation":"Denmark","code":"dk","age":23,"league":"Italy","position":"ST","number":9 },
+
+{ "name":"Shea Lacey","nation":"England","code":"gb","age":18,"league":"England","position":"RW","number":56 },
+{ "name":"Jadon Sancho","nation":"England","code":"gb","age":26,"league":"England","position":"LW","number":25 },
+
+{ "name":"Matthijs de Ligt","nation":"Netherlands","code":"nl","age":26,"league":"Germany","position":"CB","number":4 },
+{ "name":"Patrick Dorgu","nation":"Denmark","code":"dk","age":21,"league":"Italy","position":"LB","number":13 },
+{ "name":"Leny Yoro","nation":"France","code":"fr","age":20,"league":"England","position":"CB","number":15 },
+{ "name":"Ayden Heaven","nation":"England","code":"gb","age":18,"league":"England","position":"CB","number":63 },
+{ "name":"Manuel Ugarte","nation":"Uruguay","code":"uy","age":25,"league":"England","position":"DM","number":25 },
+{ "name":"Kobbie Mainoo","nation":"England","code":"gb","age":20,"league":"England","position":"CM","number":37 },
+
+  
 { "name":"Alisson Becker","nation":"Brazil","code":"br","age":33,"league":"England","position":"GK","number":1 },
 { "name":"Ederson","nation":"Brazil","code":"br","age":32,"league":"Turkey","position":"GK","number":31 },
 { "name":"Virgil van Dijk","nation":"Netherlands","code":"nl","age":34,"league":"England","position":"CB","number":4 },
