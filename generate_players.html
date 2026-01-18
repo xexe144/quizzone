@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Generate Players JSON</title>
+</head>
+<body>
+<h2>Generating players.json…</h2>
+
+<script>
+const nations = [
+  ["Argentina","ar"],["Portugal","pt"],["France","fr"],["England","gb"],
+  ["Brazil","br"],["Spain","es"],["Italy","it"],["Germany","de"],
+  ["Netherlands","nl"],["Belgium","be"],["Norway","no"],
+  ["Nigeria","ng"],["Uruguay","uy"],["Croatia","hr"]
+];
+
+const leagues = ["England","Spain","Italy","Germany","France","Portugal","Netherlands"];
+const positions = ["GK","RB","CB","LB","DM","CM","AM","RW","LW","ST"];
+
+const firstNames = ["Lucas","Marco","Alex","Leo","David","John","Carlos","Luis","Mateo","Victor","Ivan","Paulo"];
+const lastNames = ["Silva","Rossi","Garcia","Martinez","Lopez","Santos","Fernandez","Costa","Muller","Hernandez","Perez","Alvarez"];
+
+let players = [];
+let id = 1;
+
+for(let i=0;i<1000;i++){
+  const fn = firstNames[Math.floor(Math.random()*firstNames.length)];
+  const ln = lastNames[Math.floor(Math.random()*lastNames.length)];
+  const nation = nations[Math.floor(Math.random()*nations.length)];
+  const league = leagues[Math.floor(Math.random()*leagues.length)];
+
+  players.push({
+    name: fn + " " + ln + " " + id,
+    nation: nation[0],
+    code: nation[1],
+    age: Math.floor(Math.random()*18)+18,
+    league: league,
+    position: positions[Math.floor(Math.random()*positions.length)],
+    number: Math.floor(Math.random()*30)+1
+  });
+  id++;
+}
+
+const blob = new Blob([JSON.stringify(players,null,2)], {type:"application/json"});
+const a = document.createElement("a");
+a.href = URL.createObjectURL(blob);
+a.download = "players.json";
+a.click();
+
+document.body.innerHTML = "<h2>✅ players.json generated (1000+ players)</h2><p>You can close this page.</p>";
+</script>
+</body>
+</html>

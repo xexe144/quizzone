@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Guess the Player – GoatzoneQuiz</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#1a0536;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+.container{
+    width:100%;
+    max-width:580px;
+    background:#2a0a52;
+    border-radius:18px;
+    padding:20px;
+}
+h1{text-align:center;}
+
+input{
+    width:100%;
+    padding:14px;
+    border-radius:10px;
+    border:none;
+    font-size:16px;
+}
+
+.autocomplete{
+    background:#3b136f;
+    border-radius:10px;
+    margin-top:6px;
+    max-height:200px;
+    overflow-y:auto;
+}
+.autocomplete div{
+    padding:10px;
+    cursor:pointer;
+}
+.autocomplete div:hover{
+    background:#5b21b6;
+}
+
+.guess-row{
+    display:flex;
+    gap:6px;
+    margin-top:10px;
+}
+.cell{
+    flex:1;
+    padding:10px;
+    border-radius:10px;
+    background:#475569;
+    text-align:center;
+    font-size:13px;
+}
+.green{background:#16a34a;}
+.gray{background:#475569;}
+
+.flag{
+    width:20px;
+    height:auto;
+}
+
+.labels{
+    display:flex;
+    gap:6px;
+    margin-top:12px;
+    font-size:12px;
+    color:#c4b5fd;
+}
+.labels div{flex:1;text-align:center;}
+
+.footer{
+    text-align:center;
+    margin-top:15px;
+    font-size:12px;
+    color:#94a3b8;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h1>Guess the Player</h1>
+
+<div class="labels">
+    <div>🌍</div>
+    <div>🎂</div>
+    <div>🏆</div>
+    <div>🧍</div>
+    <div>🔢</div>
+</div>
+
+<input id="playerInput" placeholder="Type player name...">
+<div id="list" class="autocomplete"></div>
+
+<div id="history"></div>
+
+<div class="footer">
+All logos and brands are property of their respective owners.<br>
+© 2026 GoatzoneQuiz. All rights reserved.
+</div>
+</div>
+
+<script>
+let players=[];
+let secret;
+let attempts=0;
+const maxAttempts=6;
+
+fetch("players.json")
+.then(r=>r.json())
+.then(data=>{
+    players=data;
+    secret=players[Math.floor(Math.random()*players.length)];
+});
+
+const input=document.getElementById("playerInput");
+const list=document.getElementById("list");
+const history=document.getElementById("history");
+
+input.addEventListener("input",()=>{
+    list.innerHTML="";
+    const v=input.value.toLowerCase();
+    if(!v) return;
+
+    players.filter(p=>p.name.toLowerCase().includes(v))
+    .slice(0,20)
+    .forEach(p=>{
+        const d=document.createElement("div");
+        d.textContent=p.name;
+        d.onclick=()=>guess(p);
+        list.appendChild(d);
+    });
+});
+
+function guess(p){
+    if(attempts>=maxAttempts) return;
+    attempts++;
+    input.value="";
+    list.innerHTML="";
+
+    history.innerHTML+=`
+    <div class="guess-row">
+        <div class="cell ${p.nation===secret.nation?'green':'gray'}">
+            <img class="flag" src="https://flagcdn.com/w20/${p.code}.png">
+        </div>
+        <div class="cell">${ageArrow(p.age)}</div>
+        <div class="cell ${p.league===secret.league?'green':'gray'}">🏆</div>
+        <div class="cell ${p.position===secret.position?'green':'gray'}">${p.position}</div>
+        <div class="cell ${p.number===secret.number?'green':'gray'}">${p.number}</div>
+    </div>
+    `;
+
+    if(p.name===secret.name){
+        setTimeout(()=>alert("🎉 Correct!"),100);
+    }
+}
+
+function ageArrow(age){
+    if(age===secret.age) return `<span class="green">${age}</span>`;
+    if(age>secret.age) return `⬇ ${age}`;
+    return `⬆ ${age}`;
+}
+</script>
+
+</body>
+</html>
