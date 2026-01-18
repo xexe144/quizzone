@@ -14,7 +14,8 @@ body {
 
 .hero img {
   max-width: 420px;
-  width: 80%;
+  width: 30%;
   height: auto;
   filter: drop-shadow(0 0 30px rgba(255,215,0,0.35));
 }
+
