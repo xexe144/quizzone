@@ -49,6 +49,10 @@ input{
     border:none;
     font-size:16px;
 }
+input:disabled{
+    background:#3b136f;
+    color:#9ca3af;
+}
 .autocomplete{
     position:absolute;
     width:100%;
@@ -98,8 +102,17 @@ button{
     font-weight:bold;
 }
 .skip{ background:#4c1d95; color:white; }
-.surrender{ background:#7f1d1d; color:white; }
 .newgame{ background:#065f46; color:white; }
+
+.result{
+    margin-top:15px;
+    padding:12px;
+    border-radius:12px;
+    background:#16a34a;
+    text-align:center;
+    font-weight:bold;
+    display:none;
+}
 
 .footer{
     margin-top:15px;
@@ -129,9 +142,10 @@ button{
 
 <div id="history"></div>
 
+<div id="result" class="result"></div>
+
 <div class="buttons">
     <button class="skip" onclick="skipPlayer()">Skip &gt;&gt;</button>
-    <button class="surrender" onclick="surrender()">Surrender</button>
     <button class="newgame" onclick="newGame()">New Game</button>
 </div>
 
@@ -144,10 +158,12 @@ button{
 <script>
 let players = [];
 let secret = null;
+let gameOver = false;
 
 const input = document.getElementById("playerInput");
 const list = document.getElementById("list");
 const history = document.getElementById("history");
+const resultBox = document.getElementById("result");
 
 fetch("/players.json")
 .then(res => res.json())
@@ -158,13 +174,18 @@ fetch("/players.json")
 
 function startGame(){
     history.innerHTML = "";
+    resultBox.style.display = "none";
+    resultBox.textContent = "";
+    input.disabled = false;
     input.value = "";
     list.innerHTML = "";
+    gameOver = false;
     secret = players[Math.floor(Math.random() * players.length)];
 }
 
 // AUTOCOMPLETE
 input.addEventListener("input", () => {
+    if(gameOver) return;
     list.innerHTML = "";
     const value = input.value.toLowerCase();
     if (!value) return;
@@ -182,13 +203,15 @@ input.addEventListener("input", () => {
 
 // ENTER SUPPORT
 input.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && !gameOver) {
         const first = list.querySelector("div");
         if (first) first.click();
     }
 });
 
 function selectPlayer(player){
+    if(gameOver) return;
+
     input.value = "";
     list.innerHTML = "";
 
@@ -205,7 +228,10 @@ function selectPlayer(player){
     `;
 
     if (player.name === secret.name) {
-        setTimeout(() => alert("Correct! You guessed the player 🎉"), 100);
+        gameOver = true;
+        input.disabled = true;
+        resultBox.textContent = "Correct! The player was " + secret.name;
+        resultBox.style.display = "block";
     }
 }
 
@@ -215,13 +241,8 @@ function ageHint(age){
     return `⬆ ${age}`;
 }
 
-// BUTTONS
 function skipPlayer(){
     startGame();
-}
-
-function surrender(){
-    alert("The player was: " + secret.name);
 }
 
 function newGame(){
