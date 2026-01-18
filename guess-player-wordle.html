@@ -16,20 +16,17 @@ body{
     align-items:center;
     min-height:100vh;
 }
-
 .container{
     width:100%;
-    max-width:600px;
+    max-width:620px;
     background:#2a0a52;
     border-radius:18px;
     padding:20px;
 }
-
 h1{
     text-align:center;
     margin-bottom:10px;
 }
-
 .labels{
     display:flex;
     gap:6px;
@@ -42,11 +39,9 @@ h1{
     flex:1;
     text-align:center;
 }
-
 .input-wrapper{
     position:relative;
 }
-
 input{
     width:100%;
     padding:14px;
@@ -54,7 +49,6 @@ input{
     border:none;
     font-size:16px;
 }
-
 .autocomplete{
     position:absolute;
     width:100%;
@@ -65,22 +59,18 @@ input{
     overflow-y:auto;
     z-index:9999;
 }
-
 .autocomplete div{
     padding:10px;
     cursor:pointer;
 }
-
 .autocomplete div:hover{
     background:#5b21b6;
 }
-
 .guess-row{
     display:flex;
     gap:6px;
     margin-top:10px;
 }
-
 .cell{
     flex:1;
     padding:10px;
@@ -89,19 +79,27 @@ input{
     text-align:center;
     font-size:13px;
 }
+.green{ background:#16a34a; }
+.gray{ background:#475569; }
+.flag{ width:20px; height:auto; }
 
-.green{
-    background:#16a34a;
+.buttons{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
 }
-
-.gray{
-    background:#475569;
+button{
+    flex:1;
+    padding:10px;
+    border:none;
+    border-radius:10px;
+    font-size:14px;
+    cursor:pointer;
+    font-weight:bold;
 }
-
-.flag{
-    width:20px;
-    height:auto;
-}
+.skip{ background:#4c1d95; color:white; }
+.surrender{ background:#7f1d1d; color:white; }
+.newgame{ background:#065f46; color:white; }
 
 .footer{
     margin-top:15px;
@@ -131,6 +129,12 @@ input{
 
 <div id="history"></div>
 
+<div class="buttons">
+    <button class="skip" onclick="skipPlayer()">Skip &gt;&gt;</button>
+    <button class="surrender" onclick="surrender()">Surrender</button>
+    <button class="newgame" onclick="newGame()">New Game</button>
+</div>
+
 <div class="footer">
     All logos and brands are property of their respective owners and are used for identification purposes only.<br>
     © 2026 GoatzoneQuiz. All rights reserved.
@@ -139,21 +143,25 @@ input{
 
 <script>
 let players = [];
-let secret;
-let attempts = 0;
-const maxAttempts = 6;
+let secret = null;
 
 const input = document.getElementById("playerInput");
 const list = document.getElementById("list");
 const history = document.getElementById("history");
 
-// LOAD PLAYERS
-fetch("players.json")
+fetch("/players.json")
 .then(res => res.json())
 .then(data => {
     players = data;
-    secret = players[Math.floor(Math.random() * players.length)];
+    startGame();
 });
+
+function startGame(){
+    history.innerHTML = "";
+    input.value = "";
+    list.innerHTML = "";
+    secret = players[Math.floor(Math.random() * players.length)];
+}
 
 // AUTOCOMPLETE
 input.addEventListener("input", () => {
@@ -181,9 +189,6 @@ input.addEventListener("keydown", (e) => {
 });
 
 function selectPlayer(player){
-    if (attempts >= maxAttempts) return;
-
-    attempts++;
     input.value = "";
     list.innerHTML = "";
 
@@ -193,15 +198,9 @@ function selectPlayer(player){
             <img class="flag" src="https://flagcdn.com/w20/${player.code}.png">
         </div>
         <div class="cell">${ageHint(player.age)}</div>
-        <div class="cell ${player.league === secret.league ? 'green' : 'gray'}">
-            ${player.league}
-        </div>
-        <div class="cell ${player.position === secret.position ? 'green' : 'gray'}">
-            ${player.position}
-        </div>
-        <div class="cell ${player.number === secret.number ? 'green' : 'gray'}">
-            ${player.number}
-        </div>
+        <div class="cell ${player.league === secret.league ? 'green' : 'gray'}">${player.league}</div>
+        <div class="cell ${player.position === secret.position ? 'green' : 'gray'}">${player.position}</div>
+        <div class="cell ${player.number === secret.number ? 'green' : 'gray'}">${player.number}</div>
     </div>
     `;
 
@@ -214,6 +213,19 @@ function ageHint(age){
     if (age === secret.age) return `<span class="green">${age}</span>`;
     if (age > secret.age) return `⬇ ${age}`;
     return `⬆ ${age}`;
+}
+
+// BUTTONS
+function skipPlayer(){
+    startGame();
+}
+
+function surrender(){
+    alert("The player was: " + secret.name);
+}
+
+function newGame(){
+    startGame();
 }
 </script>
 
