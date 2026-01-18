@@ -108,7 +108,7 @@
   { "name":"Adrien Rabiot","nation":"France","code":"fr","age":29,"league":"Italy","position":"CM","number":25 },
   { "name":"Kingsley Coman","nation":"France","code":"fr","age":27,"league":"Germany","position":"LW","number":11 },
   { "name":"Theo Hernandez","nation":"France","code":"fr","age":26,"league":"Italy","position":"LB","number":19 },
-  ,
+  
   { "name":"Jordan Pickford","nation":"England","code":"gb","age":30,"league":"England","position":"GK","number":1 },
   { "name":"Nick Pope","nation":"England","code":"gb","age":32,"league":"England","position":"GK","number":22 },
   { "name":"Jurrien Timber","nation":"Netherlands","code":"nl","age":23,"league":"England","position":"CB","number":12 },
