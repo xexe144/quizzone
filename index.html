@@ -2,63 +2,108 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Generate Real Players JSON</title>
+<title>GoatzoneQuiz – Football Quizzes</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:linear-gradient(135deg,#1a0536,#2a0a52);
+    color:white;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.container{
+    text-align:center;
+    max-width:420px;
+    padding:30px;
+}
+
+.logo{
+    font-size:40px;
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.tagline{
+    margin-top:10px;
+    color:#c4b5fd;
+    font-size:16px;
+}
+
+.card{
+    margin-top:30px;
+    background:#2f0f5f;
+    padding:25px;
+    border-radius:18px;
+}
+
+.card h2{
+    margin:0 0 10px 0;
+    font-size:22px;
+}
+
+.card p{
+    font-size:14px;
+    color:#d1d5db;
+    line-height:1.4;
+}
+
+.play-btn{
+    display:block;
+    margin-top:20px;
+    padding:14px;
+    background:#7c3aed;
+    border-radius:14px;
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    text-decoration:none;
+    transition:background 0.2s ease;
+}
+
+.play-btn:hover{
+    background:#6d28d9;
+}
+
+.footer{
+    margin-top:30px;
+    font-size:12px;
+    color:#94a3b8;
+    line-height:1.4;
+}
+</style>
 </head>
 <body>
 
-<h2>Generate players.json from real CSV</h2>
-<input type="file" id="csvFile" accept=".csv">
+<div class="container">
 
-<script>
-const flagMap = {
-  Argentina:"ar", Portugal:"pt", France:"fr", England:"gb", Brazil:"br",
-  Spain:"es", Italy:"it", Germany:"de", Netherlands:"nl", Belgium:"be",
-  Norway:"no", Nigeria:"ng", Uruguay:"uy", Croatia:"hr"
-};
+    <div class="logo">GoatzoneQuiz</div>
+    <div class="tagline">Guess football players like a pro</div>
 
-document.getElementById("csvFile").addEventListener("change", e => {
-  const file = e.target.files[0];
-  const reader = new FileReader();
+    <div class="card">
+        <h2>Guess the Player</h2>
+        <p>
+            Try to guess the hidden footballer using clues such as nationality,
+            age, league, position and shirt number.
+        </p>
 
-  reader.onload = () => {
-    const lines = reader.result.split("\n");
-    const headers = lines[0].split(",");
+        <!-- ЛИНК КЪМ QUIZ -->
+        <a class="play-btn" href="guess-player-wordle.html">
+            PLAY
+        </a>
+    </div>
 
-    const players = [];
+    <div class="footer">
+        All logos and brands are property of their respective owners and are used for identification purposes only.<br>
+        © 2026 GoatzoneQuiz. All rights reserved.
+    </div>
 
-    for(let i=1;i<lines.length && players.length<2000;i++){
-      const row = lines[i].split(",");
-      if(row.length < headers.length) continue;
-
-      const get = key => row[headers.indexOf(key)] || "";
-
-      const name = get("name") || get("player_name");
-      const nation = get("nationality");
-      if(!name || !nation) continue;
-
-      players.push({
-        name: name.trim(),
-        nation: nation.trim(),
-        code: flagMap[nation.trim()] || "gb",
-        age: parseInt(get("age")) || 25,
-        league: get("league") || "Unknown",
-        position: (get("position") || "CM").substring(0,2),
-        number: Math.floor(Math.random()*30)+1
-      });
-    }
-
-    const blob = new Blob([JSON.stringify(players,null,2)], {type:"application/json"});
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "players.json";
-    a.click();
-
-    document.body.innerHTML += "<p>✅ players.json generated</p>";
-  };
-
-  reader.readAsText(file);
-});
-</script>
+</div>
 
 </body>
 </html>
