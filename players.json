@@ -362,9 +362,9 @@
  
   { "name":"Axel Witsel","nation":"Belgium","code":"be","age":37,"league":"Spain","position":"DM","number":20 },
 
-  { "name":"Arturo Vidal","nation":"Chile","code":"cl","age":38,"league":"Chile","position":"CM","number":23 },
+  { "name":"Arturo Vidal","nation":"Chile","code":"cl","age":38,"league":"Chile","position":"CM","number":23 }
+
+
 
 ]
-
-
 
