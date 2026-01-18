@@ -347,7 +347,6 @@
   { "name":"Lewis Hall","nation":"England","code":"gb","age":21,"league":"England","position":"LB","number":20 },
   { "name":"Kalvin Phillips","nation":"England","code":"gb","age":30,"league":"England","position":"DM","number":4 },
   { "name":"Ross Barkley","nation":"England","code":"gb","age":34,"league":"England","position":"CM","number":6 },
-  {
   { "name":"Ashley Young","nation":"England","code":"gb","age":40,"league":"England","position":"LB","number":18 },
 
   { "name":"Jesus Navas","nation":"Spain","code":"es","age":39,"league":"Spain","position":"RB","number":16 },
