@@ -14,11 +14,12 @@ body {
 
 .hero img {
     width: 100%;
-    max-width: 180px;   /* 👈 КОНТРОЛИРА РАЗМЕРА */
+    max-width: 80px;   /* 👈 КОНТРОЛИРА РАЗМЕРА */
     height: auto;
     filter: drop-shadow(0 0 30px rgba(255,215,0,0.35));
 }
 
 }
+
 
 
