@@ -17,6 +17,20 @@
 { "name":"Antoine Griezmann","nation":"France","code":"fr","age":35,"league":"Spain","position":"SS","number":7 },
 { "name":"Victor Osimhen","nation":"Nigeria","code":"ng","age":27,"league":"Turkey","position":"ST","number":9 },
 
+{ "name":"Rayan Cherki","nation":"France","code":"fr","age":22,"league":"England","position":"AM","number":18 },
+{ "name":"Jeremy Doku","nation":"Belgium","code":"be","age":24,"league":"England","position":"LW","number":11 },
+{ "name":"Rodrigo Hernandez","nation":"Spain","code":"es","age":29,"league":"England","position":"DM","number":16 },
+{ "name":"Omar Marmoush","nation":"Egypt","code":"eg","age":27,"league":"England","position":"LW","number":7 },
+{ "name":"Abdukodir Khusanov","nation":"Uzbekistan","code":"uz","age":22,"league":"England","position":"CB","number":4 },
+{ "name":"Tijjani Reijnders","nation":"Netherlands","code":"nl","age":27,"league":"England","position":"CM","number":14 },
+{ "name":"Nico Gonzalez","nation":"Spain","code":"es","age":24,"league":"England","position":"CM","number":6 },
+{ "name":"Bernardo Silva","nation":"Portugal","code":"pt","age":31,"league":"England","position":"CM","number":20 },
+{ "name":"Ruben Dias","nation":"Portugal","code":"pt","age":28,"league":"England","position":"CB","number":3 },
+{ "name":"Claudio Echeverri","nation":"Argentina","code":"ar","age":20,"league":"Spain","position":"AM","number":30 },
+{ "name":"Manuel Akanji","nation":"Switzerland","code":"ch","age":30,"league":"England","position":"CB","number":25 },
+{ "name":"Nathan Ake","nation":"Netherlands","code":"nl","age":31,"league":"England","position":"CB","number":6 },
+{ "name":"Savinho","nation":"Brazil","code":"br","age":22,"league":"England","position":"RW","number":26 },
+
   
 { "name":"Benjamin Sesko","nation":"Slovenia","code":"si","age":23,"league":"England","position":"ST","number":11 },
 { "name":"Rico Lewis","nation":"England","code":"gb","age":21,"league":"England","position":"RB","number":82 },
