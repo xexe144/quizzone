@@ -11,7 +11,9 @@ body {
   align-items: center;
   justify-content: center;
 }
-
+.hero-logo {
+    border: 3px solid red;
+}
 .hero img {
     width: 100%;
     max-width: 80px;   /* 👈 КОНТРОЛИРА РАЗМЕРА */
@@ -20,6 +22,7 @@ body {
 }
 
 }
+
 
 
 
