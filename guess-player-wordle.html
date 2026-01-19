@@ -272,16 +272,24 @@ input.addEventListener("keydown",(e)=>{
 function selectPlayer(p){
     if(gameOver) return;
     attempts++;
+
     input.value="";
     list.innerHTML="";
+
     history.innerHTML+=`
     <div class="guess-row">
-        <div class="cell ${p.nation===secret.nation?'green':'gray'}"></div>
+        <div class="cell ${p.nation===secret.nation?'green':'gray'}">
+            <img src="https://flagcdn.com/w20/${p.code}.png" 
+                 alt="${p.nation} flag" 
+                 style="width:20px;height:auto;">
+        </div>
         <div class="cell">${ageHint(p.age)}</div>
         <div class="cell ${p.league===secret.league?'green':'gray'}">${p.league}</div>
         <div class="cell ${p.position===secret.position?'green':'gray'}">${p.position}</div>
         <div class="cell ${p.number===secret.number?'green':'gray'}">${p.number}</div>
-    </div>`;
+    </div>
+    `;
+
     if(p.name===secret.name){
         gameOver=true;
         input.disabled=true;
@@ -290,6 +298,7 @@ function selectPlayer(p){
         shareBtn.style.display="block";
     }
 }
+
 
 function ageHint(a){
     if(a===secret.age) return `<span class="green">${a}</span>`;
@@ -312,3 +321,4 @@ function shareResult(){
 
 </body>
 </html>
+
