@@ -2,22 +2,20 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
 <title>Guess the Player – Daily Football Quiz | GoatZone</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Play a free daily football quiz. Guess the football player using nationality, age, league, position and shirt number. No sign-up required.">
+<meta name="description" content="Daily football quiz. Guess the player in 10 tries. One player per day for everyone.">
 
 <style>
 body{
     margin:0;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
     background:#1a0536;
     color:white;
+    min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    min-height:100vh;
 }
 .container{
     width:100%;
@@ -26,299 +24,243 @@ body{
     border-radius:18px;
     padding:20px;
 }
-h1{
-    text-align:center;
-    margin-bottom:10px;
-}
+h1{text-align:center;margin-bottom:10px;}
 .labels{
-    display:flex;
-    gap:6px;
-    margin-bottom:6px;
-    font-size:12px;
-    color:#c4b5fd;
-    text-transform:uppercase;
+    display:flex;gap:6px;font-size:12px;color:#c4b5fd;text-transform:uppercase;
 }
-.labels div{
-    flex:1;
-    text-align:center;
-}
-.input-wrapper{
-    position:relative;
-}
+.labels div{flex:1;text-align:center;}
 input{
-    width:100%;
-    padding:14px;
-    border-radius:10px;
-    border:none;
-    font-size:16px;
-}
-input:disabled{
-    background:#3b136f;
-    color:#9ca3af;
+    width:100%;padding:14px;border-radius:10px;border:none;font-size:16px;
 }
 .autocomplete{
-    position:absolute;
-    width:100%;
-    background:#3b136f;
-    border-radius:10px;
-    margin-top:4px;
-    max-height:220px;
-    overflow-y:auto;
-    z-index:9999;
+    position:absolute;width:100%;background:#3b136f;border-radius:10px;
+    margin-top:4px;max-height:200px;overflow-y:auto;z-index:10;
 }
-.autocomplete div{
-    padding:10px;
-    cursor:pointer;
-}
-.autocomplete div:hover{
-    background:#5b21b6;
-}
-.guess-row{
-    display:flex;
-    gap:6px;
-    margin-top:10px;
-}
+.autocomplete div{padding:10px;cursor:pointer;}
+.autocomplete div:hover{background:#5b21b6;}
+.guess-row{display:flex;gap:6px;margin-top:10px;}
 .cell{
-    flex:1;
-    padding:10px;
-    border-radius:10px;
+    flex:1;padding:10px;border-radius:10px;text-align:center;font-size:13px;
     background:#475569;
-    text-align:center;
-    font-size:13px;
 }
-.green{ background:#16a34a; }
-.gray{ background:#475569; }
-
-.result{
-    margin-top:15px;
-    padding:12px;
-    border-radius:12px;
-    background:#16a34a;
-    text-align:center;
-    font-weight:bold;
-    display:none;
+.green{background:#16a34a;}
+.flag{width:20px}
+.footer{
+    margin-top:15px;font-size:12px;color:#94a3b8;text-align:center;
 }
 
-.countdown{
-    margin-top:15px;
-    text-align:center;
-    font-size:14px;
-    color:#c4b5fd;
+/* MODAL */
+.overlay{
+    position:fixed;inset:0;background:rgba(0,0,0,.75);
+    display:none;align-items:center;justify-content:center;z-index:999;
 }
-
-.share-btn{
-    margin-top:12px;
+.modal{
+    background:#0f172a;
+    padding:22px;
+    border-radius:16px;
     width:100%;
-    padding:12px;
+    max-width:380px;
+    text-align:center;
+}
+.bars{margin-top:10px;text-align:left;}
+.bar-row{display:flex;align-items:center;margin:4px 0;}
+.bar-row span{width:20px;font-size:12px;}
+.bar{
+    height:18px;background:#4f46e5;border-radius:4px;
+}
+.share{
+    margin-top:15px;
+    background:#6366f1;
     border:none;
-    border-radius:12px;
-    background:#2563eb;
     color:white;
-    font-size:15px;
+    padding:12px;
+    width:100%;
+    border-radius:12px;
     font-weight:bold;
     cursor:pointer;
-    display:none;
 }
-.share-btn:hover{
-    background:#1d4ed8;
-}
-
-.seo-text{
-    margin-top:30px;
-    font-size:14px;
-    color:#e5e7eb;
-    line-height:1.5;
-}
-.seo-text h2{
-    font-size:18px;
-    margin-top:20px;
-    color:white;
-}
-
-.footer{
-    margin-top:25px;
-    font-size:12px;
-    color:#94a3b8;
-    text-align:center;
-}
+.small{font-size:12px;color:#94a3b8;margin-top:8px}
 </style>
 </head>
-
 <body>
 
 <div class="container">
-
-<h1>Daily Football Quiz – Guess the Player</h1>
+<h1>Guess the Player</h1>
 
 <div class="labels">
-    <div>Nationality</div>
-    <div>Age</div>
-    <div>League</div>
-    <div>Position</div>
-    <div>Number</div>
+  <div>Nation</div><div>Age</div><div>League</div><div>Pos</div><div>No</div>
 </div>
 
-<div class="input-wrapper">
-    <input id="playerInput" placeholder="Type player name...">
-    <div id="list" class="autocomplete"></div>
+<div style="position:relative">
+  <input id="playerInput" placeholder="Type player name...">
+  <div id="list" class="autocomplete"></div>
 </div>
 
 <div id="history"></div>
 
-<div id="result" class="result"></div>
-<div id="countdown" class="countdown"></div>
-
-<button id="shareBtn" class="share-btn" onclick="shareResult()">Share result</button>
-
-<div class="seo-text">
-<h2>How to play</h2>
-<p>
-Guess the hidden football player using clues such as nationality, age, league, position and shirt number.
-Each guess reveals hints to help you get closer to the correct answer.
-</p>
-
-<h2>Daily football challenge</h2>
-<p>
-A new football player is available every day for everyone. Come back daily and test your football knowledge
-with this wordle-style football quiz.
-</p>
-</div>
-
 <div class="footer">
-All logos and brands are property of their respective owners and are used for identification purposes only.<br>
-© 2026 GoatZoneQuiz. All rights reserved.
+© 2026 GoatZoneQuiz
+</div>
 </div>
 
+<!-- MODAL -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <h2 id="resultTitle"></h2>
+    <div id="resultText"></div>
+
+    <div class="bars" id="bars"></div>
+
+    <button class="share" onclick="shareResult()">Share</button>
+    <div class="small" id="nextTimer"></div>
+  </div>
 </div>
 
 <script>
 let players=[];
 let secret=null;
-let gameOver=false;
 let attempts=0;
+const MAX=10;
+let finished=false;
+let distribution=Array(10).fill(0);
+
+const todayKey = new Date().toISOString().slice(0,10);
+const storageKey = "goatzone-"+todayKey;
 
 const input=document.getElementById("playerInput");
 const list=document.getElementById("list");
 const history=document.getElementById("history");
-const resultBox=document.getElementById("result");
-const countdown=document.getElementById("countdown");
-const shareBtn=document.getElementById("shareBtn");
-
-function todayKey(){
-    const d=new Date();
-    return d.getUTCFullYear()+"-"+(d.getUTCMonth()+1)+"-"+d.getUTCDate();
-}
-function dailyIndex(total){
-    let h=0;
-    const k=todayKey();
-    for(let i=0;i<k.length;i++){
-        h=k.charCodeAt(i)+((h<<5)-h);
-    }
-    return Math.abs(h)%total;
-}
-
-function updateCountdown(){
-    const now=new Date();
-    const next=new Date();
-    next.setUTCHours(24,0,0,0);
-    const diff=next-now;
-    const h=Math.floor(diff/3600000);
-    const m=Math.floor(diff%3600000/60000);
-    const s=Math.floor(diff%60000/1000);
-    countdown.textContent=`Next mission in ${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
-}
-setInterval(updateCountdown,1000);
+const overlay=document.getElementById("overlay");
 
 fetch("/players.json")
 .then(r=>r.json())
 .then(data=>{
-    players=data;
-    startGame();
+  players=data;
+  initGame();
 });
 
-function startGame(){
-    secret=players[dailyIndex(players.length)];
-    history.innerHTML="";
-    resultBox.style.display="none";
-    shareBtn.style.display="none";
-    input.disabled=false;
-    input.value="";
-    list.innerHTML="";
-    gameOver=false;
-    attempts=0;
-    updateCountdown();
+function seededRandom(seed){
+  let h=0; for(let i=0;i<seed.length;i++) h=Math.imul(31,h)+seed.charCodeAt(i);
+  return ()=> (h=Math.imul(48271,h)%2147483647)/2147483647;
+}
+
+function initGame(){
+  const saved=localStorage.getItem(storageKey);
+  const rng=seededRandom(todayKey);
+  secret=players[Math.floor(rng()*players.length)];
+
+  if(saved){
+    showModal(JSON.parse(saved),true);
+    finished=true;
+    input.disabled=true;
+  }
 }
 
 input.addEventListener("input",()=>{
-    if(gameOver) return;
-    list.innerHTML="";
-    const v=input.value.toLowerCase();
-    if(!v) return;
-    players.filter(p=>p.name.toLowerCase().includes(v)).slice(0,20).forEach(p=>{
-        const d=document.createElement("div");
-        d.textContent=p.name;
-        d.onclick=()=>selectPlayer(p);
-        list.appendChild(d);
+  if(finished)return;
+  list.innerHTML="";
+  const v=input.value.toLowerCase();
+  if(!v)return;
+  players.filter(p=>p.name.toLowerCase().includes(v))
+    .slice(0,20)
+    .forEach(p=>{
+      const d=document.createElement("div");
+      d.textContent=p.name;
+      d.onclick=()=>guess(p);
+      list.appendChild(d);
     });
 });
 
-input.addEventListener("keydown",(e)=>{
-    if(e.key==="Enter"&&!gameOver){
-        const f=list.querySelector("div");
-        if(f) f.click();
-    }
-});
+function guess(p){
+  if(finished)return;
+  attempts++;
+  list.innerHTML="";
+  input.value="";
 
-function selectPlayer(p){
-    if(gameOver) return;
-    attempts++;
-
-    input.value="";
-    list.innerHTML="";
-
-    history.innerHTML+=`
-    <div class="guess-row">
-        <div class="cell ${p.nation===secret.nation?'green':'gray'}">
-            <img src="https://flagcdn.com/w20/${p.code}.png" 
-                 alt="${p.nation} flag" 
-                 style="width:20px;height:auto;">
-        </div>
-        <div class="cell">${ageHint(p.age)}</div>
-        <div class="cell ${p.league===secret.league?'green':'gray'}">${p.league}</div>
-        <div class="cell ${p.position===secret.position?'green':'gray'}">${p.position}</div>
-        <div class="cell ${p.number===secret.number?'green':'gray'}">${p.number}</div>
+  history.innerHTML+=`
+  <div class="guess-row">
+    <div class="cell ${p.nation===secret.nation?'green':''}">
+      <img class="flag" src="https://flagcdn.com/w20/${p.code}.png">
     </div>
-    `;
+    <div class="cell">${p.age}</div>
+    <div class="cell ${p.league===secret.league?'green':''}">${p.league}</div>
+    <div class="cell ${p.position===secret.position?'green':''}">${p.position}</div>
+    <div class="cell ${p.number===secret.number?'green':''}">${p.number}</div>
+  </div>`;
 
-    if(p.name===secret.name){
-        gameOver=true;
-        input.disabled=true;
-        resultBox.textContent=`Correct! ${secret.name} in ${attempts} attempts`;
-        resultBox.style.display="block";
-        shareBtn.style.display="block";
-    }
+  if(p.name===secret.name){
+    distribution[attempts-1]++;
+    endGame(true);
+  } else if(attempts>=MAX){
+    endGame(false);
+  }
 }
 
+function endGame(win){
+  finished=true;
+  input.disabled=true;
+  const data={
+    win,
+    attempts,
+    distribution,
+    date:todayKey
+  };
+  localStorage.setItem(storageKey,JSON.stringify(data));
+  showModal(data,false);
+}
 
-function ageHint(a){
-    if(a===secret.age) return `<span class="green">${a}</span>`;
-    return a>secret.age?`⬇ ${a}`:`⬆ ${a}`;
+function showModal(data,readonly){
+  overlay.style.display="flex";
+  document.getElementById("resultTitle").textContent =
+    data.win?"You guessed it!":"Out of tries!";
+  document.getElementById("resultText").textContent =
+    data.win?`Solved in ${data.attempts}/10`:`The player was ${secret.name}`;
+
+  const bars=document.getElementById("bars");
+  bars.innerHTML="";
+  data.distribution.forEach((v,i)=>{
+    const w=v*20;
+    bars.innerHTML+=`
+    <div class="bar-row">
+      <span>${i+1}</span>
+      <div class="bar" style="width:${w}px"></div>
+    </div>`;
+  });
+
+  startTimer();
 }
 
 function shareResult(){
-    let t=`GoatZone Daily – Guess the Player\nAttempts: ${attempts}\n\n`;
-    document.querySelectorAll(".guess-row").forEach(r=>{
-        r.querySelectorAll(".cell").forEach(c=>{
-            t+=c.classList.contains("green")?"🟩":"⬜";
-        });
-        t+="\n";
-    });
-    t+=`\nhttps://goatzone.online`;
-    navigator.clipboard.writeText(t);
-    alert("Result copied to clipboard!");
+  const data=localStorage.getItem(storageKey);
+  const encoded=btoa(data);
+  const url=location.origin+location.pathname+"?share="+encoded;
+  navigator.clipboard.writeText(url);
+  alert("Result link copied!");
+}
+
+function startTimer(){
+  const el=document.getElementById("nextTimer");
+  setInterval(()=>{
+    const now=new Date();
+    const t=new Date();
+    t.setHours(24,0,0,0);
+    const diff=t-now;
+    const h=Math.floor(diff/36e5);
+    const m=Math.floor(diff%36e5/6e4);
+    const s=Math.floor(diff%6e4/1000);
+    el.textContent=`Next mission in ${h}h ${m}m ${s}s`;
+  },1000);
+}
+
+// SHARE VIEW
+const params=new URLSearchParams(location.search);
+if(params.has("share")){
+  const data=JSON.parse(atob(params.get("share")));
+  finished=true;
+  input.disabled=true;
+  showModal(data,true);
 }
 </script>
 
 </body>
 </html>
-
