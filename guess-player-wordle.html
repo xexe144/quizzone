@@ -133,7 +133,9 @@ const history=document.getElementById("history");
 const overlay=document.getElementById("overlay");
 
 const todayKey = new Date().toISOString().slice(0,10);
-const storageKey = "goatzone-"+todayKey;
+const STORAGE_VERSION = "v2";
+const storageKey = "goatzone-"+STORAGE_VERSION+"-"+todayKey;
+
 
 /* === LOAD PLAYERS (FIXED PATH) === */
 fetch("players.json")
@@ -290,3 +292,4 @@ if(params.has("share")){
 
 </body>
 </html>
+
