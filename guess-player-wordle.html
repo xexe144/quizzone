@@ -29,22 +29,24 @@ h1{text-align:center;margin-bottom:10px;}
     display:flex;gap:6px;font-size:12px;color:#c4b5fd;text-transform:uppercase;
 }
 .labels div{flex:1;text-align:center;}
+.input-wrapper{position:relative;}
 input{
     width:100%;padding:14px;border-radius:10px;border:none;font-size:16px;
 }
 .autocomplete{
     position:absolute;width:100%;background:#3b136f;border-radius:10px;
-    margin-top:4px;max-height:200px;overflow-y:auto;z-index:10;
+    margin-top:4px;max-height:220px;overflow-y:auto;z-index:20;
 }
 .autocomplete div{padding:10px;cursor:pointer;}
 .autocomplete div:hover{background:#5b21b6;}
 .guess-row{display:flex;gap:6px;margin-top:10px;}
 .cell{
-    flex:1;padding:10px;border-radius:10px;text-align:center;font-size:13px;
-    background:#475569;
+    flex:1;padding:10px;border-radius:10px;text-align:center;
+    font-size:13px;background:#475569;
 }
 .green{background:#16a34a;}
-.flag{width:20px}
+.flag{width:20px;display:block;margin:0 auto;}
+
 .footer{
     margin-top:15px;font-size:12px;color:#94a3b8;text-align:center;
 }
@@ -82,6 +84,7 @@ input{
 .small{font-size:12px;color:#94a3b8;margin-top:8px}
 </style>
 </head>
+
 <body>
 
 <div class="container">
@@ -91,8 +94,8 @@ input{
   <div>Nation</div><div>Age</div><div>League</div><div>Pos</div><div>No</div>
 </div>
 
-<div style="position:relative">
-  <input id="playerInput" placeholder="Type player name...">
+<div class="input-wrapper">
+  <input id="playerInput" placeholder="Type player name..." autocomplete="off">
   <div id="list" class="autocomplete"></div>
 </div>
 
@@ -124,141 +127,164 @@ const MAX=10;
 let finished=false;
 let distribution=Array(10).fill(0);
 
-const todayKey = new Date().toISOString().slice(0,10);
-const storageKey = "goatzone-"+todayKey;
-
 const input=document.getElementById("playerInput");
 const list=document.getElementById("list");
 const history=document.getElementById("history");
 const overlay=document.getElementById("overlay");
 
-fetch("/players.json")
+const todayKey = new Date().toISOString().slice(0,10);
+const storageKey = "goatzone-"+todayKey;
+
+/* === LOAD PLAYERS (FIXED PATH) === */
+fetch("players.json")
 .then(r=>r.json())
 .then(data=>{
-  players=data;
-  initGame();
+    players=data;
+    initGame();
+})
+.catch(err=>{
+    console.error("FAILED TO LOAD players.json", err);
 });
 
+/* === DAILY SEED === */
 function seededRandom(seed){
-  let h=0; for(let i=0;i<seed.length;i++) h=Math.imul(31,h)+seed.charCodeAt(i);
-  return ()=> (h=Math.imul(48271,h)%2147483647)/2147483647;
+    let h=0;
+    for(let i=0;i<seed.length;i++){
+        h=Math.imul(31,h)+seed.charCodeAt(i);
+    }
+    return ()=> (h=Math.imul(48271,h)%2147483647)/2147483647;
 }
 
+/* === INIT GAME === */
 function initGame(){
-  const saved=localStorage.getItem(storageKey);
-  const rng=seededRandom(todayKey);
-  secret=players[Math.floor(rng()*players.length)];
+    const rng=seededRandom(todayKey);
+    secret=players[Math.floor(rng()*players.length)];
 
-  if(saved){
-    showModal(JSON.parse(saved),true);
+    const saved=localStorage.getItem(storageKey);
+    if(saved){
+        finished=true;
+        input.disabled=true;
+        showModal(JSON.parse(saved));
+    }
+}
+
+/* === AUTOCOMPLETE === */
+input.addEventListener("input",()=>{
+    if(finished) return;
+    list.innerHTML="";
+    const v=input.value.toLowerCase();
+    if(!v) return;
+
+    players
+      .filter(p=>p.name.toLowerCase().includes(v))
+      .slice(0,20)
+      .forEach(p=>{
+        const d=document.createElement("div");
+        d.textContent=p.name;
+        d.onclick=()=>guess(p);
+        list.appendChild(d);
+      });
+});
+
+input.addEventListener("keydown",(e)=>{
+    if(e.key==="Enter" && !finished){
+        const first=list.querySelector("div");
+        if(first) first.click();
+    }
+});
+
+/* === GUESS === */
+function guess(p){
+    if(finished) return;
+    attempts++;
+    list.innerHTML="";
+    input.value="";
+
+    history.innerHTML+=`
+    <div class="guess-row">
+        <div class="cell ${p.nation===secret.nation?'green':''}">
+            <img class="flag" src="https://flagcdn.com/w20/${p.code}.png">
+        </div>
+        <div class="cell">${p.age}</div>
+        <div class="cell ${p.league===secret.league?'green':''}">${p.league}</div>
+        <div class="cell ${p.position===secret.position?'green':''}">${p.position}</div>
+        <div class="cell ${p.number===secret.number?'green':''}">${p.number}</div>
+    </div>`;
+
+    if(p.name===secret.name){
+        distribution[attempts-1]++;
+        endGame(true);
+    } else if(attempts>=MAX){
+        endGame(false);
+    }
+}
+
+/* === END GAME === */
+function endGame(win){
     finished=true;
     input.disabled=true;
-  }
+    const data={
+        win,
+        attempts,
+        distribution,
+        date:todayKey
+    };
+    localStorage.setItem(storageKey,JSON.stringify(data));
+    showModal(data);
 }
 
-input.addEventListener("input",()=>{
-  if(finished)return;
-  list.innerHTML="";
-  const v=input.value.toLowerCase();
-  if(!v)return;
-  players.filter(p=>p.name.toLowerCase().includes(v))
-    .slice(0,20)
-    .forEach(p=>{
-      const d=document.createElement("div");
-      d.textContent=p.name;
-      d.onclick=()=>guess(p);
-      list.appendChild(d);
+/* === MODAL === */
+function showModal(data){
+    overlay.style.display="flex";
+    document.getElementById("resultTitle").textContent =
+        data.win ? "You guessed it!" : "Out of tries!";
+    document.getElementById("resultText").textContent =
+        data.win ? `Solved in ${data.attempts}/10` : `The player was ${secret.name}`;
+
+    const bars=document.getElementById("bars");
+    bars.innerHTML="";
+    data.distribution.forEach((v,i)=>{
+        bars.innerHTML+=`
+        <div class="bar-row">
+            <span>${i+1}</span>
+            <div class="bar" style="width:${v*20}px"></div>
+        </div>`;
     });
-});
 
-function guess(p){
-  if(finished)return;
-  attempts++;
-  list.innerHTML="";
-  input.value="";
-
-  history.innerHTML+=`
-  <div class="guess-row">
-    <div class="cell ${p.nation===secret.nation?'green':''}">
-      <img class="flag" src="https://flagcdn.com/w20/${p.code}.png">
-    </div>
-    <div class="cell">${p.age}</div>
-    <div class="cell ${p.league===secret.league?'green':''}">${p.league}</div>
-    <div class="cell ${p.position===secret.position?'green':''}">${p.position}</div>
-    <div class="cell ${p.number===secret.number?'green':''}">${p.number}</div>
-  </div>`;
-
-  if(p.name===secret.name){
-    distribution[attempts-1]++;
-    endGame(true);
-  } else if(attempts>=MAX){
-    endGame(false);
-  }
+    startTimer();
 }
 
-function endGame(win){
-  finished=true;
-  input.disabled=true;
-  const data={
-    win,
-    attempts,
-    distribution,
-    date:todayKey
-  };
-  localStorage.setItem(storageKey,JSON.stringify(data));
-  showModal(data,false);
-}
-
-function showModal(data,readonly){
-  overlay.style.display="flex";
-  document.getElementById("resultTitle").textContent =
-    data.win?"You guessed it!":"Out of tries!";
-  document.getElementById("resultText").textContent =
-    data.win?`Solved in ${data.attempts}/10`:`The player was ${secret.name}`;
-
-  const bars=document.getElementById("bars");
-  bars.innerHTML="";
-  data.distribution.forEach((v,i)=>{
-    const w=v*20;
-    bars.innerHTML+=`
-    <div class="bar-row">
-      <span>${i+1}</span>
-      <div class="bar" style="width:${w}px"></div>
-    </div>`;
-  });
-
-  startTimer();
-}
-
-function shareResult(){
-  const data=localStorage.getItem(storageKey);
-  const encoded=btoa(data);
-  const url=location.origin+location.pathname+"?share="+encoded;
-  navigator.clipboard.writeText(url);
-  alert("Result link copied!");
-}
-
+/* === TIMER === */
 function startTimer(){
-  const el=document.getElementById("nextTimer");
-  setInterval(()=>{
-    const now=new Date();
-    const t=new Date();
-    t.setHours(24,0,0,0);
-    const diff=t-now;
-    const h=Math.floor(diff/36e5);
-    const m=Math.floor(diff%36e5/6e4);
-    const s=Math.floor(diff%6e4/1000);
-    el.textContent=`Next mission in ${h}h ${m}m ${s}s`;
-  },1000);
+    const el=document.getElementById("nextTimer");
+    setInterval(()=>{
+        const now=new Date();
+        const t=new Date();
+        t.setHours(24,0,0,0);
+        const diff=t-now;
+        const h=Math.floor(diff/36e5);
+        const m=Math.floor(diff%36e5/6e4);
+        const s=Math.floor(diff%6e4/1000);
+        el.textContent=`Next mission in ${h}h ${m}m ${s}s`;
+    },1000);
 }
 
-// SHARE VIEW
+/* === SHARE === */
+function shareResult(){
+    const data=localStorage.getItem(storageKey);
+    const encoded=btoa(data);
+    const url=location.origin+location.pathname+"?share="+encoded;
+    navigator.clipboard.writeText(url);
+    alert("Result link copied!");
+}
+
+/* === SHARE VIEW MODE === */
 const params=new URLSearchParams(location.search);
 if(params.has("share")){
-  const data=JSON.parse(atob(params.get("share")));
-  finished=true;
-  input.disabled=true;
-  showModal(data,true);
+    const data=JSON.parse(atob(params.get("share")));
+    finished=true;
+    input.disabled=true;
+    showModal(data);
 }
 </script>
 
