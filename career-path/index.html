@@ -123,6 +123,7 @@ let players = [];
 let paths = [];
 let currentStage = 0;
 let attempts = 0;
+let gameOver = false;
 let secret = null;
 
 const stageNames = ["Game 1", "Semi Final", "Big Final"];
@@ -134,94 +135,109 @@ const hints = document.getElementById("hints");
 const resultBox = document.getElementById("result");
 const stageBox = document.getElementById("stage");
 
+/* ---------- DAILY INDEX ---------- */
 function todayKey(){
-    const d=new Date();
-    return d.getUTCFullYear()+"-"+(d.getUTCMonth()+1)+"-"+d.getUTCDate();
+  const d = new Date();
+  return d.getUTCFullYear()+"-"+(d.getUTCMonth()+1)+"-"+d.getUTCDate();
 }
 function dailyIndex(total){
-    let h=0,k=todayKey();
-    for(let i=0;i<k.length;i++) h=k.charCodeAt(i)+((h<<5)-h);
-    return Math.abs(h)%total;
+  let h=0, k=todayKey();
+  for(let i=0;i<k.length;i++){
+    h = k.charCodeAt(i) + ((h<<5)-h);
+  }
+  return Math.abs(h)%total;
 }
 
-function updateCountdown(){
-    const now=new Date();
-    const next=new Date();
-    next.setUTCHours(24,0,0,0);
-    const diff=next-now;
-    const h=Math.floor(diff/3600000);
-    const m=Math.floor(diff%3600000/60000);
-    const s=Math.floor(diff%60000/1000);
-    document.getElementById("countdown").textContent=
-        `Next challenge in ${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
-}
-setInterval(updateCountdown,1000);
-updateCountdown();
-
-fetch("../players.json").then(r=>r.json()).then(d=>players=d);
+/* ---------- LOAD DATA ---------- */
+fetch("../players.json")
+  .then(r=>r.json())
+  .then(d=>players=d);
 
 fetch("../data/career-paths.json")
-.then(r=>r.json())
-.then(d=>{
-    paths=d;
+  .then(r=>r.json())
+  .then(d=>{
+    paths = d;
     startStage();
-})
-.catch(()=>{
-    pathBox.textContent="Career paths not found";
-});
+  });
 
+/* ---------- GAME START ---------- */
 function startStage(){
-    attempts=0;
-    hints.textContent="";
-    resultBox.style.display="none";
-    stageBox.textContent=stageNames[currentStage];
-    const p=paths[dailyIndex(paths.length)];
-    secret=p;
-    pathBox.textContent=p.path.join(" → ");
+  attempts = 0;
+  gameOver = false;
+  hints.textContent = "";
+  resultBox.style.display = "none";
+  input.disabled = false;
+
+  stageBox.textContent = stageNames[currentStage];
+
+  secret = paths[dailyIndex(paths.length)];
+  pathBox.textContent = secret.path.join(" → ");
 }
 
+/* ---------- AUTOCOMPLETE ---------- */
 input.addEventListener("input",()=>{
-    list.innerHTML="";
-    const v=input.value.toLowerCase();
-    if(!v) return;
-    players.filter(p=>p.name.toLowerCase().includes(v)).slice(0,15)
+  if(gameOver) return;
+  list.innerHTML="";
+  const v=input.value.toLowerCase();
+  if(!v) return;
+
+  players
+    .filter(p=>p.name.toLowerCase().includes(v))
+    .slice(0,15)
     .forEach(p=>{
-        const d=document.createElement("div");
-        d.textContent=p.name;
-        d.onclick=()=>guess(p);
-        list.appendChild(d);
+      const d=document.createElement("div");
+      d.textContent=p.name;
+      d.onclick=()=>makeGuess(p.name);
+      list.appendChild(d);
     });
 });
 
-function guess(p){
-    attempts++;
-    input.value="";
-    list.innerHTML="";
+/* ---------- GUESS ---------- */
+function makeGuess(name){
+  if(gameOver) return;
 
-    if(p.name===secret.player){
-        currentStage++;
-        if(currentStage===3){
-            resultBox.textContent="🏆 You won the Big Final!";
-            resultBox.style.display="block";
-            input.disabled=true;
-        }else{
-            startStage();
-        }
-        return;
+  attempts++;
+  input.value="";
+  list.innerHTML="";
+
+  // ❌ WRONG
+  if(name !== secret.player){
+
+    if(attempts === 3){
+      hints.textContent = `Hint: Position – ${secret.position}`;
+    }
+    if(attempts === 5){
+      hints.textContent += ` | Nationality – ${secret.nation}`;
     }
 
-    if(attempts===3){
-        hints.textContent=`Hint: Position – ${secret.position}`;
+    if(attempts >= MAX_ATTEMPTS){
+      endGame(false);
     }
-    if(attempts===5){
-        hints.textContent+=` | Nationality – ${secret.nation}`;
-    }
-    if(attempts>=MAX_ATTEMPTS){
-        resultBox.textContent=`❌ Game over. Player was ${secret.player}`;
-        resultBox.style.display="block";
-        input.disabled=true;
-    }
+    return;
+  }
+
+  // ✅ CORRECT
+  currentStage++;
+  if(currentStage === 3){
+    endGame(true);
+  } else {
+    startStage();
+  }
+}
+
+/* ---------- END GAME ---------- */
+function endGame(win){
+  gameOver = true;
+  input.disabled = true;
+
+  if(win){
+    resultBox.textContent = "🏆 You won the Big Final!";
+  } else {
+    resultBox.textContent = `❌ Game over. Player was ${secret.player}`;
+  }
+  resultBox.style.display="block";
 }
 </script>
+
 </body>
 </html>
