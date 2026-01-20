@@ -96,106 +96,101 @@
   },
 
    {
-    "player": "Rafael Leão",
+    "name": "Rafael Leão",
     "nation": "Portugal",
     "position": "LW",
     "path": ["Sporting CP", "Lille", "AC Milan"]
   },
   {
-    "player": "Lautaro Martínez",
+    "name": "Lautaro Martínez",
     "nation": "Argentina",
     "position": "ST",
     "path": ["Racing Club", "Inter"]
   },
   {
-    "player": "Khvicha Kvaratskhelia",
+    "name": "Khvicha Kvaratskhelia",
     "nation": "Georgia",
     "position": "LW",
     "path": ["Dinamo Tbilisi", "Rubin Kazan", "Napoli", "PSG"]
   },
   
   {
-    "player": "Florian Wirtz",
+    "name": "Florian Wirtz",
     "nation": "Germany",
     "position": "AM",
     "path": ["Cologne", "Bayer Leverkusen", "Liverpool"]
   },
   
   {
-    "player": "Martin Ødegaard",
+    "name": "Martin Ødegaard",
     "nation": "Norway",
     "position": "AM",
     "path": ["Strømsgodset", "Real Madrid", "Arsenal"]
   },
   {
-    "player": "William Saliba",
+    "name": "William Saliba",
     "nation": "France",
     "position": "CB",
     "path": ["Saint-Étienne", "Arsenal"]
   },
+
   {
-    "player": "Bruno Fernandes",
-    "nation": "Portugal",
-    "position": "AM",
-    "path": ["Udinese", "Sampdoria", "Sporting CP", "Manchester United"]
-  },
-  {
-    "player": "Rodri",
+    "name": "Rodri",
     "nation": "Spain",
     "position": "DM",
     "path": ["Villarreal", "Atletico Madrid", "Manchester City"]
   },
   {
-    "player": "Bernardo Silva",
+    "name": "Bernardo Silva",
     "nation": "Portugal",
     "position": "CM",
     "path": ["Benfica", "Monaco", "Manchester City"]
   },
   {
-    "player": "Federico Valverde",
+    "name": "Federico Valverde",
     "nation": "Uruguay",
     "position": "CM",
     "path": ["Peñarol", "Real Madrid"]
   },
   {
-    "player": "Pedri",
+    "name": "Pedri",
     "nation": "Spain",
     "position": "CM",
     "path": ["Las Palmas", "Barcelona"]
   },
   
   {
-    "player": "Randal Kolo Muani",
+    "name": "Randal Kolo Muani",
     "nation": "France",
     "position": "ST",
     "path": ["Nantes", "Eintracht Frankfurt", "PSG", "Juventus(Loan)", "Tottenham Hotspur"]
   },
   {
-    "player": "Jonathan David",
+    "name": "Jonathan David",
     "nation": "Canada",
     "position": "ST",
     "path": ["Gent", "Lille", "Juventus"]
   },
   {
-    "player": "Xavi Simons",
+    "name": "Xavi Simons",
     "nation": "Netherlands",
     "position": "AM",
     "path": ["Barcelona", "PSG", "RB Leipzig", "Tottenham Hotspur"]
   },
   {
-    "player": "Benjamin Šeško",
+    "name": "Benjamin Šeško",
     "nation": "Slovenia",
     "position": "ST",
     "path": ["Domžale", "RB Salzburg", "RB Leipzig", "Manchester United"]
   },
   {
-    "player": "Victor Boniface",
+    "name": "Victor Boniface",
     "nation": "Nigeria",
     "position": "ST",
-    "path": ["Bodø/Glimt", "Union SG", "Bayer Leverkusen", " Werder Bremen(Loan)"]
+    "path": ["Bodø/Glimt", "Union SG", "Bayer Leverkusen", "Werder Bremen(Loan)"]
   },
   {
-    "player": "Alessandro Bastoni",
+    "name": "Alessandro Bastoni",
     "nation": "Italy",
     "position": "CB",
     "path": ["Atalanta", "Inter", "Parma(Loan)", "Inter" ]
@@ -203,165 +198,165 @@
     
 
   {
-    "player": "Martin Zubimendi",
+    "name": "Martin Zubimendi",
     "nation": "Spain",
     "position": "DM",
     "path": ["Real Sociedad B", "Real Sociedad", "Arsenal"]
   },
   {
-    "player": "João Palhinha",
+    "name": "João Palhinha",
     "nation": "Portugal",
     "position": "DM",
     "path": ["Braga", "Sporting CP", "Fulham", "Bayern Munich", "Tottenham(Loan)", "Bayern Munich"]
   },
   {
-    "player": "Dominik Szoboszlai",
+    "name": "Dominik Szoboszlai",
     "nation": "Hungary",
     "position": "AM",
     "path": ["FC Liefering", "RB Salzburg", "RB Leipzig", "Liverpool"]
   },
   {
-    "player": "Matheus Cunha",
+    "name": "Matheus Cunha",
     "nation": "Brazil",
     "position": "ST",
     "path": ["Sion", "RB Leipzig", "Hertha Berlin", "Wolves", "Manchester United"]
   },
   {
-    "player": "Rasmus Højlund",
+    "name": "Rasmus Højlund",
     "nation": "Denmark",
     "position": "ST",
     "path": ["Copenhagen", "Sturm Graz", "Atalanta", "Manchester United", "Napoli(Loan)"]
   },
   {
-    "player": "Antony",
+    "name": "Antony",
     "nation": "Brazil",
     "position": "RW",
     "path": ["São Paulo", "Ajax", "Manchester United", "Real Betis"]
   },
   {
-    "player": "Fikayo Tomori",
+    "name": "Fikayo Tomori",
     "nation": "England",
     "position": "CB",
     "path": ["Chelsea", "Hull City(Loan)", "Derby County(Loan)", "AC Milan"]
   },
   
   {
-    "player": "Manuel Ugarte",
+    "name": "Manuel Ugarte",
     "nation": "Uruguay",
     "position": "DM",
     "path": ["Fénix", "Famalicão", "Sporting CP", "PSG", "Manchester United"]
   },
   {
-    "player": "Noni Madueke",
+    "name": "Noni Madueke",
     "nation": "England",
     "position": "RW",
     "path": ["Tottenham Academy", "PSV", "Chelsea", "Arsenal"]
   },
   {
-    "player": "Amadou Onana",
+    "name": "Amadou Onana",
     "nation": "Belgium",
     "position": "DM",
     "path": ["Hamburg", "Lille", "Everton", "Aston Villa"]
   },
   {
-    "player": "Bryan Mbeumo",
+    "name": "Bryan Mbeumo",
     "nation": "Cameroon",
     "position": "RW",
     "path": ["Troyes", "Brentford", "Manchester United"]
   },
   {
-    "player": "Pedro Neto",
+    "name": "Pedro Neto",
     "nation": "Portugal",
     "position": "LW",
     "path": ["Braga", "Lazio", "Wolves", "Chelsea"]
   },
   {
-    "player": "Jeremie Frimpong",
+    "name": "Jeremie Frimpong",
     "nation": "Netherlands",
     "position": "RB",
     "path": ["Manchester City U23", "Celtic", "Bayer Leverkusen", "Liverpool"]
   },
   {
-    "player": "Teun Koopmeiners",
+    "name": "Teun Koopmeiners",
     "nation": "Netherlands",
     "position": "CM",
     "path": ["AZ Alkmaar", "Atalanta", "Juventus"]
   },
   
   {
-    "player": "James Maddison",
+    "name": "James Maddison",
     "nation": "England",
     "position": "AM",
     "path": ["Coventry City", "Norwich City", "Leicester City", "Tottenham"]
   },
   {
-    "player": "Lucas Paquetá",
+    "name": "Lucas Paquetá",
     "nation": "Brazil",
     "position": "AM",
     "path": ["Flamengo", "AC Milan", "Lyon", "West Ham"]
   },
   {
-    "player": "Benjamin Pavard",
+    "name": "Benjamin Pavard",
     "nation": "France",
     "position": "RB",
     "path": ["Lille", "Stuttgart", "Bayern Munich", "Inter"]
   },
   {
-    "player": "Renato Sanches",
+    "name": "Renato Sanches",
     "nation": "Portugal",
     "position": "CM",
     "path": ["Benfica", "Bayern Munich", "Swansea(Loan)", "Lille", "PSG", "Roma(Loan)", "Benfica(Loan)", "Panathinaikos(Loan)"]
   },
   {
-    "player": "Leon Bailey",
+    "name": "Leon Bailey",
     "nation": "Jamaica",
     "position": "RW",
     "path": ["Genk", "Bayer Leverkusen", "Aston Villa", "Roma(Loan)"]
   },
   {
-    "player": "Piero Hincapié",
+    "name": "Piero Hincapié",
     "nation": "Ecuador",
     "position": "CB",
     "path": ["Independiente", "Talleres", "Bayer Leverkusen", "Arsenal"]
   },
   {
-    "player": "Giovani Lo Celso",
+    "name": "Giovani Lo Celso",
     "nation": "Argentina",
     "position": "CM",
     "path": ["Rosario Central", "PSG", "Betis", "Tottenham", "Betis"]
   },
   {
-    "player": "Weston McKennie",
+    "name": "Weston McKennie",
     "nation": "USA",
     "position": "CM",
     "path": ["Schalke", "Juventus", "Leeds United(Loan)"]
   },
   {
-    "player": "Youssouf Fofana",
+    "name": "Youssouf Fofana",
     "nation": "France",
     "position": "DM",
     "path": ["Strasbourg", "Monaco", "AC Milan"]
   },
   {
-    "player": "Sergej Milinković-Savić",
+    "name": "Sergej Milinković-Savić",
     "nation": "Serbia",
     "position": "CM",
     "path": ["Genk", "Lazio", "Al-Hilal"]
   },
   {
-    "player": "Moussa Diaby",
+    "name": "Moussa Diaby",
     "nation": "France",
     "position": "RW",
     "path": ["PSG", "Bayer Leverkusen", "Aston Villa", "Al-Ittihad"]
   },
   {
-    "player": "Gonçalo Ramos",
+    "name": "Gonçalo Ramos",
     "nation": "Portugal",
     "position": "ST",
     "path": ["Benfica B", "Benfica", "PSG"]
   },
   {
-    "player": "Takehiro Tomiyasu",
+    "name": "Takehiro Tomiyasu",
     "nation": "Japan",
     "position": "CB",
     "path": ["Avispa Fukuoka", "Sint-Truiden", "Bologna", "Arsenal", "Without Club", "Ajax"]
