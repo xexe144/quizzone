@@ -200,7 +200,7 @@ function updateCountdown(){
 setInterval(updateCountdown,1000);
 
 fetch("/players.json").then(r=>r.json()).then(d=>players=d);
-fetch("/data/career-paths.json").then(r=>r.json()).then(d=>{
+fetch("../data/career-paths.json").then(r=>r.json()).then(d=>{
     paths=d;
     loadStage();
 });
