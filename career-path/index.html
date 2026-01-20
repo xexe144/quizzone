@@ -2,241 +2,77 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Career Path Quiz – Daily Football Game | GoatZone</title>
+<title>Career Path Test | GoatZone</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Guess the football player by his career path. Complete Game 1, reach the Semi Final and conquer the Big Final. Daily football quiz.">
 
 <style>
 body{
-    margin:0;
-    font-family:Arial, Helvetica, sans-serif;
-    background:#1a0536;
-    color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:#1a0536;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
 }
 .container{
-    width:100%;
-    max-width:620px;
-    background:#2a0a52;
-    border-radius:18px;
-    padding:20px;
+  background:#2a0a52;
+  padding:24px;
+  border-radius:18px;
+  width:100%;
+  max-width:620px;
+  text-align:center;
 }
-h1{text-align:center;margin-bottom:4px;}
-.stage{text-align:center;color:#c4b5fd;margin-bottom:10px;}
-.path-box{
-    background:#3b136f;
-    padding:14px;
-    border-radius:12px;
-    text-align:center;
-    font-weight:bold;
-    margin-bottom:10px;
+.path{
+  margin-top:20px;
+  padding:14px;
+  background:#3b136f;
+  border-radius:12px;
+  font-size:16px;
 }
-.input-wrapper{position:relative;}
-input{
-    width:100%;
-    padding:14px;
-    border-radius:10px;
-    border:none;
-    font-size:16px;
-}
-.autocomplete{
-    position:absolute;
-    width:100%;
-    background:#3b136f;
-    border-radius:10px;
-    margin-top:4px;
-    max-height:200px;
-    overflow-y:auto;
-    z-index:999;
-}
-.autocomplete div{
-    padding:10px;
-    cursor:pointer;
-}
-.autocomplete div:hover{background:#5b21b6;}
-.hints{
-    margin-top:10px;
-    font-size:14px;
-    color:#fde68a;
-}
-.result{
-    margin-top:15px;
-    padding:12px;
-    border-radius:12px;
-    background:#16a34a;
-    text-align:center;
-    font-weight:bold;
-    display:none;
-}
-.countdown{
-    margin-top:12px;
-    text-align:center;
-    font-size:14px;
-    color:#c4b5fd;
-}
-.seo{
-    margin-top:20px;
-    font-size:14px;
-    color:#e5e7eb;
-}
-.footer{
-    margin-top:20px;
-    font-size:12px;
-    color:#94a3b8;
-    text-align:center;
+.error{
+  color:#f87171;
+  margin-top:12px;
 }
 </style>
 </head>
 
 <body>
+
 <div class="container">
-<h1>Career Path Quiz</h1>
-<div class="stage" id="stage">Game 1</div>
+  <h1>Career Path Loader Test</h1>
+  <p>If you see a career path below, JSON works ✅</p>
 
-<div id="path" class="path-box">Loading career path...</div>
-
-<div class="input-wrapper">
-    <input id="input" placeholder="Type player name...">
-    <div id="list" class="autocomplete"></div>
-</div>
-
-<div id="hints" class="hints"></div>
-<div id="result" class="result"></div>
-<div id="countdown" class="countdown"></div>
-
-<div class="seo">
-<b>How to play:</b><br>
-Guess the footballer by his career path. You have 7 attempts.  
-After 3 wrong guesses you get the position hint, after 5 the nationality.
-</div>
-
-<div class="footer">© 2026 GoatZoneQuiz</div>
+  <div id="path" class="path">Loading career path...</div>
+  <div id="error" class="error"></div>
 </div>
 
 <script>
-const MAX_ATTEMPTS = 7;
-
-let players = [];
-let paths = [];
-let currentStage = 0;
-let attempts = 0;
-let gameOver = false;
-let secret = null;
-
-const stageNames = ["Game 1", "Semi Final", "Big Final"];
-
-const input = document.getElementById("input");
-const list = document.getElementById("list");
 const pathBox = document.getElementById("path");
-const hints = document.getElementById("hints");
-const resultBox = document.getElementById("result");
-const stageBox = document.getElementById("stage");
-
-/* ---------- DAILY INDEX ---------- */
-function todayKey(){
-  const d = new Date();
-  return d.getUTCFullYear()+"-"+(d.getUTCMonth()+1)+"-"+d.getUTCDate();
-}
-function dailyIndex(total){
-  let h=0, k=todayKey();
-  for(let i=0;i<k.length;i++){
-    h = k.charCodeAt(i) + ((h<<5)-h);
-  }
-  return Math.abs(h)%total;
-}
-
-/* ---------- LOAD DATA ---------- */
-fetch("../players.json")
-  .then(r=>r.json())
-  .then(d=>players=d);
+const errorBox = document.getElementById("error");
 
 fetch("../data/career-paths.json")
-  .then(r=>r.json())
-  .then(d=>{
-    paths = d;
-    startStage();
+  .then(res => {
+    if(!res.ok) throw new Error("HTTP " + res.status);
+    return res.json();
+  })
+  .then(data => {
+    if(!data.length){
+      pathBox.textContent = "JSON loaded but is empty ❌";
+      return;
+    }
+
+    // показваме първия path (само тест)
+    const p = data[0];
+
+    pathBox.textContent = p.path.join(" → ");
+  })
+  .catch(err => {
+    pathBox.textContent = "Failed to load career paths ❌";
+    errorBox.textContent = err.message;
+    console.error(err);
   });
-
-/* ---------- GAME START ---------- */
-function startStage(){
-  attempts = 0;
-  gameOver = false;
-  hints.textContent = "";
-  resultBox.style.display = "none";
-  input.disabled = false;
-
-  stageBox.textContent = stageNames[currentStage];
-
-  secret = paths[dailyIndex(paths.length)];
-  pathBox.textContent = secret.path.join(" → ");
-}
-
-/* ---------- AUTOCOMPLETE ---------- */
-input.addEventListener("input",()=>{
-  if(gameOver) return;
-  list.innerHTML="";
-  const v=input.value.toLowerCase();
-  if(!v) return;
-
-  players
-    .filter(p=>p.name.toLowerCase().includes(v))
-    .slice(0,15)
-    .forEach(p=>{
-      const d=document.createElement("div");
-      d.textContent=p.name;
-      d.onclick=()=>makeGuess(p.name);
-      list.appendChild(d);
-    });
-});
-
-/* ---------- GUESS ---------- */
-function makeGuess(name){
-  if(gameOver) return;
-
-  attempts++;
-  input.value="";
-  list.innerHTML="";
-
-  // ❌ WRONG
-  if(name !== secret.player){
-
-    if(attempts === 3){
-      hints.textContent = `Hint: Position – ${secret.position}`;
-    }
-    if(attempts === 5){
-      hints.textContent += ` | Nationality – ${secret.nation}`;
-    }
-
-    if(attempts >= MAX_ATTEMPTS){
-      endGame(false);
-    }
-    return;
-  }
-
-  // ✅ CORRECT
-  currentStage++;
-  if(currentStage === 3){
-    endGame(true);
-  } else {
-    startStage();
-  }
-}
-
-/* ---------- END GAME ---------- */
-function endGame(win){
-  gameOver = true;
-  input.disabled = true;
-
-  if(win){
-    resultBox.textContent = "🏆 You won the Big Final!";
-  } else {
-    resultBox.textContent = `❌ Game over. Player was ${secret.player}`;
-  }
-  resultBox.style.display="block";
-}
 </script>
 
 </body>
