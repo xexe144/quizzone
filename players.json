@@ -11,7 +11,6 @@
 { "name":"Luka Modric","nation":"Croatia","code":"hr","age":40,"league":"Retired","position":"CM","number":10 },
 
 { "name":"Jude Bellingham","nation":"England","code":"gb","age":22,"league":"Spain","position":"CM","number":5 },
-{ "name":"Vinicius Junior","nation":"Brazil","code":"br","age":25,"league":"Spain","position":"LW","number":7 },
 { "name":"Bukayo Saka","nation":"England","code":"gb","age":24,"league":"England","position":"RW","number":7 },
 { "name":"Harry Kane","nation":"England","code":"gb","age":32,"league":"Germany","position":"ST","number":9 },
 { "name":"Antoine Griezmann","nation":"France","code":"fr","age":35,"league":"Spain","position":"SS","number":7 },
@@ -45,7 +44,7 @@
 { "name":"Frenkie de Jong","nation":"Netherlands","code":"nl","age":28,"league":"Spain","position":"CM","number":21 },
 
 { "name":"Joao Cancelo","nation":"Portugal","code":"pt","age":32,"league":"Spain","position":"RB","number":2 },
-{ "name":"Vinicius Junior","nation":"Brazil","code":"br","age":26,"league":"Spain","position":"LW","number":7 },
+{ "name":"Vinicius Junior","nation":"Brazil","code":"br","age":25,"league":"Spain","position":"LW","number":7 },
 { "name":"Arda Guler","nation":"Turkey","code":"tr","age":21,"league":"Spain","position":"AM","number":15 },
 
 { "name":"Franco Mastantuono","nation":"Argentina","code":"ar","age":18,"league":"Spain","position":"AM","number":30 },
