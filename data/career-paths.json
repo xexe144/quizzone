@@ -1,95 +1,98 @@
 [
   {
     "name": "Erling Haaland",
-    "path": ["Molde", "RB Salzburg", "Borussia Dortmund", "Manchester City"],
     "nation": "Norway",
-    "position": "ST"
+    "position": "ST",
+    "path": ["Molde", "RB Salzburg", "Borussia Dortmund", "Manchester City"]
   },
   {
     "name": "Kevin De Bruyne",
-    "path": ["Genk", "Chelsea", "Wolfsburg", "Manchester City", "Napoli"],
     "nation": "Belgium",
-    "position": "CM"
+    "position": "CM",
+     "path": ["Genk", "Chelsea", "Wolfsburg", "Manchester City", "Napoli"]
   },
   {
     "name": "Mohamed Salah",
-    "path": ["Basel", "Chelsea", "Roma", "Liverpool"],
     "nation": "Egypt",
-    "position": "RW"
+    "position": "RW",
+    "path": ["Basel", "Chelsea", "Roma", "Liverpool"]
   },
   {
     "name": "Robert Lewandowski",
-    "path": ["Lech Poznan", "Borussia Dortmund", "Bayern Munich", "Barcelona"],
+  
     "nation": "Poland",
-    "position": "ST"
+    "position": "ST",
+      "path": ["Lech Poznan", "Borussia Dortmund", "Bayern Munich", "Barcelona"]
   },
   {
     "name": "Harry Kane",
-    "path": ["Tottenham", "Bayern Munich"],
+   
     "nation": "England",
-    "position": "ST"
+    "position": "ST",
+     "path": ["Tottenham", "Bayern Munich"]
   }
 
   {
     "name": "Sadio Mane",
-    "path": ["Metz", "Red Bull Salzburg", "Southampton", "Liverpool", "Al-Nassr"],
+    
     "nation": "Senegal",
-    "position": "LW"
+    "position": "LW",
+    "path": ["Metz", "Red Bull Salzburg", "Southampton", "Liverpool", "Al-Nassr"]
   },
   {
     "name": "Bruno Fernandes",
-    "path": ["Udinese", "Sampdoria", "Sporting CP", "Manchester United"],
     "nation": "Portugal",
-    "position": "AM"
+    "position": "AM",
+    "path": ["Udinese", "Sampdoria", "Sporting CP", "Manchester United"]
   },
   {
     "name": "Victor Osimhen",
-    "path": ["Lille", "Napoli", "Galatasaray"],
     "nation": "Nigeria",
-    "position": "ST"
+    "position": "ST",
+    "path": ["Lille", "Napoli", "Galatasaray"]
   },
   {
     "name": "Jude Bellingham",
-    "path": ["Birmingham City", "Borussia Dortmund", "Real Madrid"],
     "nation": "England",
-    "position": "CM"
+    "position": "CM",
+    "path": ["Birmingham City", "Borussia Dortmund", "Real Madrid"]
   },
   {
     "name": "Declan Rice",
-    "path": ["West Ham United", "Arsenal"],
     "nation": "England",
-    "position": "DM"
+    "position": "DM",
+    "path": ["West Ham United", "Arsenal"]
   }
 
   {
     "name": "Riyad Mahrez",
-    "path": ["Le Havre", "Leicester City", "Manchester City", "Al-Ahli"],
     "nation": "Algeria",
-    "position": "RW"
+    "position": "RW",
+    "path": ["Le Havre", "Leicester City", "Manchester City", "Al-Ahli"]
   },
   {
     "name": "Ngolo Kante",
-    "path": ["Caen", "Leicester City", "Chelsea", "Al-Ittihad Club"],
     "nation": "France",
-    "position": "DM"
+    "position": "DM",
+    "path": ["Caen", "Leicester City", "Chelsea", "Al-Ittihad Club"]
   },
   {
     "name": "Achraf Hakimi",
-    "path": ["Real Madrid", "Borussia Dortmund", "Inter", "PSG"],
     "nation": "Morocco",
-    "position": "RB"
+    "position": "RB",
+    "path": ["Real Madrid", "Borussia Dortmund", "Inter", "PSG"]
   },
   {
     "name": "Luka Modric",
-    "path": ["Dinamo Zagreb", "Tottenham", "Real Madrid"],
     "nation": "Croatia",
-    "position": "CM"
+    "position": "CM",
+    "path": ["Dinamo Zagreb", "Tottenham", "Real Madrid"]
   },
   {
     "name": "Alexis Mac Allister",
-    "path": ["Argentinos Juniors", "Brighton", "Liverpool"],
     "nation": "Argentina",
-    "position": "CM"
+    "position": "CM",
+    "path": ["Argentinos Juniors", "Brighton", "Liverpool"]
   }
 
    {
