@@ -199,11 +199,21 @@ function updateCountdown(){
 }
 setInterval(updateCountdown,1000);
 
-fetch("/players.json").then(r=>r.json()).then(d=>players=d);
-fetch("../data/career-paths.json").then(r=>r.json()).then(d=>{
-    paths=d;
-    loadStage();
-});
+fetch("../players.json")
+  .then(r => r.json())
+  .then(d => players = d);
+
+fetch("../data/career-paths.json")
+  .then(r => r.json())
+  .then(d => {
+      paths = d;
+      loadStage();
+  })
+  .catch(err => {
+      pathBox.textContent = "Failed to load career paths";
+      console.error(err);
+  });
+
 
 function loadStage(){
     current=paths[Math.floor(Math.random()*paths.length)];
