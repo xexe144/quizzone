@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Daily Tattoo Football Quiz | GoatZone</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Guess the football player by his tattoo. Daily football quiz. 15 attempts, hints included.">
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:#1a0536;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+}
+.container{
+  max-width:620px;
+  width:100%;
+  background:#2a0a52;
+  border-radius:18px;
+  padding:20px;
+  text-align:center;
+}
+img{
+  max-width:100%;
+  border-radius:14px;
+  margin-bottom:15px;
+}
+input{
+  width:100%;
+  padding:14px;
+  border-radius:10px;
+  border:none;
+  font-size:16px;
+}
+.autocomplete{
+  background:#3b136f;
+  border-radius:10px;
+  margin-top:4px;
+  max-height:200px;
+  overflow-y:auto;
+  text-align:left;
+}
+.autocomplete div{
+  padding:10px;
+  cursor:pointer;
+}
+.autocomplete div:hover{
+  background:#5b21b6;
+}
+.hint{
+  margin-top:10px;
+  padding:10px;
+  background:#7c3aed;
+  border-radius:10px;
+  display:none;
+}
+.result{
+  margin-top:15px;
+  padding:12px;
+  background:#16a34a;
+  border-radius:12px;
+  display:none;
+  font-weight:bold;
+}
+.footer{
+  margin-top:20px;
+  font-size:12px;
+  color:#94a3b8;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h1>Daily Tattoo Quiz</h1>
+<p>Guess the footballer by his tattoo</p>
+
+<img id="tattooImg" src="" alt="Football tattoo">
+
+<input id="playerInput" placeholder="Type player name...">
+<div id="list" class="autocomplete"></div>
+
+<div id="hint" class="hint"></div>
+<div id="result" class="result"></div>
+
+<div class="footer">
+New tattoo every day • 15 attempts<br>
+© 2026 GoatZoneQuiz
+</div>
+
+</div>
+
+<script>
+let tattoos=[];
+let secret=null;
+let attempts=0;
+let gameOver=false;
+
+const img=document.getElementById("tattooImg");
+const input=document.getElementById("playerInput");
+const list=document.getElementById("list");
+const hint=document.getElementById("hint");
+const result=document.getElementById("result");
+
+function todayKey(){
+  const d=new Date();
+  return d.getUTCFullYear()+"-"+(d.getUTCMonth()+1)+"-"+d.getUTCDate();
+}
+
+function dailyIndex(total){
+  let h=0;
+  const k=todayKey();
+  for(let i=0;i<k.length;i++){
+    h=k.charCodeAt(i)+((h<<5)-h);
+  }
+  return Math.abs(h)%total;
+}
+
+fetch("/tattoo-quiz/tattoos.json")
+.then(r=>r.json())
+.then(data=>{
+  tattoos=data;
+  secret=tattoos[dailyIndex(tattoos.length)];
+  img.src=secret.image;
+});
+
+input.addEventListener("input",()=>{
+  if(gameOver) return;
+  list.innerHTML="";
+  const v=input.value.toLowerCase();
+  if(!v) return;
+
+  tattoos
+    .filter(t=>t.name.toLowerCase().includes(v))
+    .forEach(t=>{
+      const d=document.createElement("div");
+      d.textContent=t.name;
+      d.onclick=()=>guess(t.name);
+      list.appendChild(d);
+    });
+});
+
+function guess(name){
+  if(gameOver) return;
+  attempts++;
+  input.value="";
+  list.innerHTML="";
+
+  if(name===secret.name){
+    gameOver=true;
+    result.textContent=`Correct! It was ${secret.name} 🎉`;
+    result.style.display="block";
+    input.disabled=true;
+    return;
+  }
+
+  if(attempts===7){
+    hint.textContent="Hint: " + secret.matchHint;
+    hint.style.display="block";
+  }
+
+  if(attempts>=15){
+    gameOver=true;
+    result.textContent=`Game over! The player was ${secret.name}`;
+    result.style.display="block";
+    input.disabled=true;
+  }
+}
+</script>
+</body>
+</html>
