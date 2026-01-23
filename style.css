@@ -12,6 +12,16 @@ body {
   justify-content: center;
 }
 
+.card-icon{
+  width:48px;
+  height:48px;
+  object-fit:contain;
+  margin:0 auto 12px auto;
+  opacity:0.9;
+  display:block;
+}
+
+
 
 .top-bar{
   position:fixed;
@@ -71,6 +81,7 @@ body {
 
 
 }
+
 
 
 
