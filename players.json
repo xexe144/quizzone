@@ -50,7 +50,7 @@
 { "name":"Franco Mastantuono","nation":"Argentina","code":"ar","age":18,"league":"Spain","position":"AM","number":30 },
 { "name":"Dean Huijsen","nation":"Netherlands","code":"nl","age":20,"league":"Spain","position":"CB","number":4 },
 
-{ "name":"Thibaut Courtois","nation":"Belgium","code":"be","age":34,"league":"Spain","position":"GK","number":1 },
+
 { "name":"Antonio Rudiger","nation":"Germany","code":"de","age":33,"league":"Spain","position":"CB","number":22 },
 { "name":"Eder Militao","nation":"Brazil","code":"br","age":28,"league":"Spain","position":"CB","number":3 },
 { "name":"Brahim Diaz","nation":"Spain","code":"es","age":27,"league":"Spain","position":"AM","number":21 },
@@ -100,11 +100,11 @@
 
 { "name":"Marc-Andre ter Stegen","nation":"Germany","code":"de","age":34,"league":"Spain","position":"GK","number":1 },
 { "name":"Ronald Araujo","nation":"Uruguay","code":"uy","age":27,"league":"Spain","position":"CB","number":4 },
-{ "name":"Frenkie de Jong","nation":"Netherlands","code":"nl","age":28,"league":"Spain","position":"CM","number":21 },
-{ "name":"Pedri","nation":"Spain","code":"es","age":23,"league":"Spain","position":"CM","number":8 },
+
+
 { "name":"Gavi","nation":"Spain","code":"es","age":21,"league":"Spain","position":"CM","number":6 },
 { "name":"Rodrygo","nation":"Brazil","code":"br","age":25,"league":"Spain","position":"RW","number":11 },
-{ "name":"Federico Valverde","nation":"Uruguay","code":"uy","age":27,"league":"Spain","position":"CM","number":15 },
+
 { "name":"Thibaut Courtois","nation":"Belgium","code":"be","age":34,"league":"Spain","position":"GK","number":1 },
 { "name":"Jan Oblak","nation":"Slovenia","code":"si","age":34,"league":"Spain","position":"GK","number":13 },
 
@@ -126,7 +126,7 @@
 { "name":"Emiliano Martinez","nation":"Argentina","code":"ar","age":33,"league":"England","position":"GK","number":23 },
 { "name":"Ben White","nation":"England","code":"gb","age":28,"league":"England","position":"CB","number":4 },
 { "name":"Gabriel Magalhaes","nation":"Brazil","code":"br","age":28,"league":"England","position":"CB","number":6 },
-{ "name":"Lisandro Martinez","nation":"Argentina","code":"ar","age":28,"league":"England","position":"CB","number":6 },
+
 { "name":"Luke Shaw","nation":"England","code":"gb","age":30,"league":"England","position":"LB","number":23 },
 { "name":"Reece James","nation":"England","code":"gb","age":26,"league":"England","position":"RB","number":24 },
 { "name":"James Maddison","nation":"England","code":"gb","age":29,"league":"England","position":"AM","number":10 },
@@ -135,6 +135,10 @@
 { "name":"Marcus Rashford","nation":"England","code":"gb","age":28,"league":"Spain","position":"LW","number":10 },
 { "name":"Darwin Nunez","nation":"Uruguay","code":"uy","age":26,"league":"Saudi Arabia","position":"ST","number":9 },
 { "name":"Luis Diaz","nation":"Colombia","code":"co","age":29,"league":"Germany","position":"LW","number":7 },
+{ "name":"Diego León","nation":"Paraguay","code":"py","age":18,"league":"England","position":"LB","number":35 },
+{ "name":"Tyrell Malacia","nation":"Netherlands","code":"nl","age":26,"league":"England","position":"LB","number":12 },
+{ "name":"Senne Lammens","nation":"Belgium","code":"be","age":23,"league":"England","position":"GK","number":31 },
+{ "name":"Altay Bayındır","nation":"Turkey","code":"tr","age":27,"league":"England","position":"GK","number":1 },
 
 
 { "name":"Kepa Arrizabalaga","nation":"Spain","code":"es","age":31,"league":"England","position":"GK","number":13 },
@@ -220,7 +224,7 @@
 { "name":"Marc Guehi","nation":"England","code":"gb","age":25,"league":"England","position":"CB","number":6 },
 { "name":"Pervis Estupinan","nation":"Ecuador","code":"ec","age":28,"league":"Italy","position":"LB","number":30 },
 { "name":"Joao Palhinha","nation":"Portugal","code":"pt","age":30,"league":"England","position":"DM","number":26 },
-{ "name":"Alexis Mac Allister","nation":"Argentina","code":"ar","age":27,"league":"England","position":"CM","number":10 },
+
 { "name":"Dominik Szoboszlai","nation":"Hungary","code":"hu","age":25,"league":"England","position":"AM","number":8 },
 { "name":"Youri Tielemans","nation":"Belgium","code":"be","age":29,"league":"England","position":"CM","number":8 },
 { "name":"Jarrod Bowen","nation":"England","code":"gb","age":29,"league":"England","position":"RW","number":20 },
@@ -394,7 +398,7 @@
 
   { "name":"Piotr Zielinski","nation":"Poland","code":"pl","age":31,"league":"Italy","position":"CM","number":20 },
   { "name":"Wojciech Szczesny","nation":"Poland","code":"pl","age":35,"league":"Spain","position":"GK","number":1 },
-  { "name":"Robert Lewandowski","nation":"Poland","code":"pl","age":36,"league":"Spain","position":"ST","number":9 },
+ 
 
   { "name":"Pierre-Emile Hojbjerg","nation":"Denmark","code":"dk","age":30,"league":"France","position":"DM","number":5 },
   { "name":"Joakim Maehle","nation":"Denmark","code":"dk","age":28,"league":"Germany","position":"LB","number":21 },
